@@ -124,6 +124,28 @@ footer{padding:26px 0 46px;font-size:13px;color:var(--ink-mute);display:flex;jus
   .surah-head .ar-name{font-size:28px}
   .nav-links{font-size:13px;gap:14px}
 }
+.tafsir-panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:10px;font-size:14px;color:var(--ink-soft);display:none;animation:slideDown .2s ease}
+.tafsir-panel.show{display:block}
+.tafsir-panel .tafsir-title{font-weight:600;color:var(--gold);font-size:12px;letter-spacing:.08em;margin-bottom:8px}
+.tafsir-panel p{margin-bottom:8px;line-height:1.6}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.ayat-actions{display:flex;gap:8px;margin-top:10px;opacity:0;transition:opacity .2s}
+.ayat:hover .ayat-actions,.ayat-actions.show{opacity:1}
+.ayat-action-btn{background:none;border:1px solid var(--line);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:14px;transition:all .2s}
+.ayat-action-btn:hover{border-color:var(--emerald);background:var(--emerald-pale)}
+.copy-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--emerald);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:100;animation:fadeInOut2s ease;pointer-events:none}
+@keyframes fadeInOut{0%{opacity:0}20%{opacity:1}80%{opacity:1}100%{opacity:0}}
+.stats-bar{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.stat-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;flex:1;min-width:120px;text-align:center}
+.stat-card .stat-num{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--emerald)}
+.stat-card .stat-label{font-size:12px;color:var(--ink-mute);margin-top:4px}
+.juz-tracker{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:4px;margin-bottom:20px}
+.juz-dot{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1px solid var(--line);cursor:pointer;transition:all .2s}
+.juz-dot.read{background:var(--emerald-pale);border-color:var(--emerald);color:var(--emerald)}
+.juz-dot:hover{border-color:var(--emerald)}
+.hafalan-overlay{position:fixed;bottom:80px;right:20px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;box-shadow:04px20pxrgba(0,0,0,.1);z-index:50;font-size:13px}
+.hafalan-overlay label{display:flex;align-items:center;gap:8px;cursor:pointer}
+.keyboard-hint{position:fixed;bottom:20px;right:20px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px;color:var(--ink-mute);z-index:50;opacity:.7}
 </style>
 </head>
 <body>
@@ -203,6 +225,60 @@ function shareAyat(surah, ayat, ar, tr){
     window.open(wa,'_blank');
   }
 }
+
+// === COPY AYAT ===
+function copyAyat(surah, ayat, ar, tr){
+  const name = SURAH_NAMES[surah-1];
+  const text = ar + '\n\n' + tr + '\n\n(QS. ' + name + ': ' + ayat + ')';
+  navigator.clipboard.writeText(text).then(()=>{
+    showToast('Ayat disalin ke clipboard');
+  }).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('Ayat disalin');
+  });
+}
+function showToast(msg){
+  const t = document.createElement('div'); t.className='copy-toast'; t.textContent=msg; document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2000);
+}
+
+// === READING STATS ===
+function getReadStats(){try{return JSON.parse(localStorage.getItem('qm-stats'))||{surahs:{},ayatRead:0};}catch(e){return{surahs:{},ayatRead:0};}}
+function recordRead(surah, ayat){
+  const stats = getReadStats();
+  if(!stats.surahs[surah]) stats.surahs[surah] = [];
+  if(!stats.surahs[surah].includes(ayat)){ stats.surahs[surah].push(ayat); stats.ayatRead=(stats.ayatRead||0)+1; }
+  localStorage.setItem('qm-stats', JSON.stringify(stats));
+}
+function getReadJuz(){
+  const stats = getReadStats(); const juzRead = new Set();
+  for(const s of Object.keys(stats.surahs)){ const meta = SURAHS_META[parseInt(s)]; if(meta) juzRead.add(meta.juz); }
+  return [...juzRead];
+}
+
+// === HAFALAN MODE ===
+let hafalanMode = false;
+function toggleHafalan(){
+  hafalanMode = !hafalanMode;
+  document.body.classList.toggle('hafalan-active', hafalanMode);
+  document.querySelectorAll('.tr').forEach(el=>{ el.style.display = hafalanMode?'none':''; });
+  document.querySelectorAll('.latin').forEach(el=>{ el.style.display = hafalanMode?'none':''; });
+  localStorage.setItem('qm-hafalan', hafalanMode?'1':'0');
+}
+
+// === KEYBOARD NAVIGATION ===
+let currentAyatIdx = 0;
+document.addEventListener('keydown', (e)=>{
+  if(!currentSurah) return;
+  const ayats = document.querySelectorAll('.ayat');
+  if(!ayats.length) return;
+  if(e.key==='ArrowDown'||e.key==='j'){ e.preventDefault(); currentAyatIdx=Math.min(currentAyatIdx+1,ayats.length-1); ayats[currentAyatIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+  else if(e.key==='ArrowUp'||e.key==='k'){ e.preventDefault(); currentAyatIdx=Math.max(currentAyatIdx-1,0); ayats[currentAyatIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+  else if(e.key===' '){ e.preventDefault(); const btn=ayats[currentAyatIdx].querySelector('.play'); if(btn)btn.click(); }
+  else if(e.key==='b'){ const a=REGISTRY[currentSurah]?.ayat[currentAyatIdx]; if(a){ toggleBookmark(currentSurah,currentAyatIdx+1); showToast(isBookmarked(currentSurah,currentAyatIdx+1)?'Bookmark ditambah':'Bookmark dihapus'); } }
+});
+
 const view = document.getElementById('view');
 const audio = new Audio();
 let nowPlaying = 0, sequential = false, currentSurah = 0, arSize = 34;
