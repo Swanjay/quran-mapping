@@ -846,55 +846,83 @@ function renderDoaSholat(){
 // ==================== TATA CARA SHOLAT ====================
 function renderTataSholat(){
   stopAudio();
+  // SVG illustrations for prayer positions
+  const svg = {
+    niat: `<svg viewBox="0 0 120 160" width="80"><circle cx="60" cy="20" r="12" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="32" x2="60" y2="90" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="50" x2="30" y2="70" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="50" x2="90" y2="70" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="90" x2="40" y2="140" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="90" x2="80" y2="140" stroke="var(--emerald)" stroke-width="2"/><text x="60" y="155" text-anchor="middle" font-size="10" fill="var(--ink-mute)">Berdiri Tegak</text></svg>`,
+    takbir: `<svg viewBox="0 0 120 160" width="80"><circle cx="60" cy="20" r="12" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="32" x2="60" y2="90" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="45" x2="25" y2="25" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="45" x2="95" y2="25" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="90" x2="40" y2="140" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="90" x2="80" y2="140" stroke="var(--emerald)" stroke-width="2"/><circle cx="25" cy="22" r="4" fill="var(--emerald)" opacity="0.5"/><circle cx="95" cy="22" r="4" fill="var(--emerald)" opacity="0.5"/><text x="60" y="155" text-anchor="middle" font-size="10" fill="var(--ink-mute)">Angkat Tangan</text></svg>`,
+    berdiri: `<svg viewBox="0 0 120 160" width="80"><circle cx="60" cy="20" r="12" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="32" x2="60" y2="90" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="55" x2="45" y2="75" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="55" x2="75" y2="75" stroke="var(--emerald)" stroke-width="2"/><line x1="45" y1="75" x2="45" y2="55" stroke="var(--emerald)" stroke-width="2" stroke-dasharray="3"/><line x1="60" y1="90" x2="40" y2="140" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="90" x2="80" y2="140" stroke="var(--emerald)" stroke-width="2"/><text x="60" y="155" text-anchor="middle" font-size="10" fill="var(--ink-mute)">Tangan di Dada</text></svg>`,
+    rukuk: `<svg viewBox="0 0 140 120" width="100"><circle cx="30" cy="45" r="12" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="42" y1="42" x2="100" y2="42" stroke="var(--emerald)" stroke-width="2"/><line x1="30" y1="57" x2="30" y2="100" stroke="var(--emerald)" stroke-width="2"/><line x1="30" y1="100" x2="15" y2="110" stroke="var(--emerald)" stroke-width="2"/><line x1="30" y1="100" x2="45" y2="110" stroke="var(--emerald)" stroke-width="2"/><line x1="95" y1="42" x2="95" y2="60" stroke="var(--emerald)" stroke-width="2"/><line x1="95" y1="60" x2="85" y2="50" stroke="var(--emerald)" stroke-width="2"/><text x="70" y="115" text-anchor="middle" font-size="10" fill="var(--ink-mute)">Rukuk</text></svg>`,
+    itidal: `<svg viewBox="0 0 120 160" width="80"><circle cx="60" cy="20" r="12" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="32" x2="60" y2="90" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="50" x2="30" y2="70" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="50" x2="90" y2="70" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="90" x2="40" y2="140" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="90" x2="80" y2="140" stroke="var(--emerald)" stroke-width="2"/><path d="M45 15 Q60 5 75 15" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="3"/><text x="60" y="155" text-anchor="middle" font-size="10" fill="var(--ink-mute)">I'tidal</text></svg>`,
+    sujud: `<svg viewBox="0 0 140 100" width="100"><circle cx="110" cy="55" r="10" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="100" y1="55" x2="60" y2="55" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="55" x2="70" y2="40" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="55" x2="30" y2="55" stroke="var(--emerald)" stroke-width="2"/><line x1="30" y1="55" x2="20" y2="70" stroke="var(--emerald)" stroke-width="2"/><line x1="40" y1="55" x2="40" y2="75" stroke="var(--emerald)" stroke-width="2"/><line x1="50" y1="55" x2="50" y2="75" stroke="var(--emerald)" stroke-width="2"/><circle cx="20" cy="72" r="3" fill="var(--emerald)" opacity="0.5"/><text x="70" y="95" text-anchor="middle" font-size="10" fill="var(--ink-mute)">Sujud</text></svg>`,
+    duduk: `<svg viewBox="0 0 120 120" width="90"><circle cx="60" cy="15" r="12" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="27" x2="60" y2="65" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="40" x2="35" y2="55" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="40" x2="85" y2="55" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="65" x2="30" y2="80" stroke="var(--emerald)" stroke-width="2"/><line x1="30" y1="80" x2="30" y2="100" stroke="var(--emerald)" stroke-width="2"/><line x1="60" y1="65" x2="90" y2="80" stroke="var(--emerald)" stroke-width="2"/><line x1="90" y1="80" x2="100" y2="70" stroke="var(--emerald)" stroke-width="2"/><text x="60" y="115" text-anchor="middle" font-size="10" fill="var(--ink-mute)">Duduk Iftirasy</text></svg>`,
+    tasyahud: `<svg viewBox="0 0 140 110" width="100"><circle cx="70" cy="15" r="12" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="27" x2="70" y2="60" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="40" x2="45" y2="50" stroke="var(--emerald)" stroke-width="2"/><line x1="45" y1="50" x2="45" y2="35" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="40" x2="95" y2="55" stroke="var(--emerald)" stroke-width="2"/><line x1="95" y1="55" x2="105" y2="45" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="60" x2="40" y2="75" stroke="var(--emerald)" stroke-width="2"/><line x1="40" y1="75" x2="20" y2="80" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="60" x2="100" y2="75" stroke="var(--emerald)" stroke-width="2"/><circle cx="45" cy="32" r="3" fill="var(--gold)"/><text x="70" y="100" text-anchor="middle" font-size="10" fill="var(--ink-mute)">Tasyahud</text></svg>`,
+    salam: `<svg viewBox="0 0 140 120" width="100"><circle cx="70" cy="20" r="12" fill="none" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="32" x2="70" y2="80" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="50" x2="40" y2="65" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="50" x2="100" y2="65" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="80" x2="50" y2="110" stroke="var(--emerald)" stroke-width="2"/><line x1="70" y1="80" x2="90" y2="110" stroke="var(--emerald)" stroke-width="2"/><path d="M58 20 Q45 15 35 20" fill="none" stroke="var(--gold)" stroke-width="2" marker-end="url(#arrow)"/><path d="M82 20 Q95 15 105 20" fill="none" stroke="var(--gold)" stroke-width="2"/><text x="70" y="115" text-anchor="middle" font-size="10" fill="var(--ink-mute)">Salam</text></svg>`
+  };
   const langkah = [
-    {no:1,judul:"Niat",desc:"Niat sholat di dalam hati. Tidak diucapkan. Contoh: \"Ushallii fardhadh-dhuhri arba'a raka'aatin mustaqbilal qiblati adaa'an lillaahi ta'aalaa\" (Aku niat shalat fardhu Dzuhur empat rakaat menghadap kibat karena Allah Ta'ala).",ikon:"🕌"},
-    {no:2,judul:"Takbiratul Ihram",desc:"Angkat kedua tangan sejajar telinga atau bahu, lalu ucapkan: \"Allahu Akbar\". Pandangan ke tempat sujud.",ikon:"🤲"},
-    {no:3,judul:"Membaca Doa Iftitah",desc:"Setelah takbir, baca doa iftitah. Posisi tangan: tangan kanan memegang tangan kiri di dada.",ikon:"📖"},
-    {no:4,judul:"Membaca Al-Fatihah",desc:"Wajib dibaca di setiap ruka't. Dibaca pelan (sirr) pada shalat Dzuhur dan Ashar, dan keras (jahr) pada Subuh, Maghrib, Isya.",ikon:"📖"},
-    {no:5,judul:"Rukuk",desc:"Bungkukkan badan hingga punggung lurus. Tangan memegang lutut. Baca: \"Subhaana Rabbiyal 'Azhimi wa bihamdih\" (3x).",ikon:"🧎"},
-    {no:6,judul:"I'tidal",desc:"Bangkit dari rukuk tegak. Baca: \"Sami'allaahu liman hamidah, Rabbanaa wa lakal hamd\".",ikon:"🧍"},
-    {no:7,judul:"Sujud Pertama",desc:"Turun sujud dengan tujuh anggota badan menyentuh lantai (dahi, kedua tangan, kedua lutut, kedua kaki). Baca: \"Subhaana Rabbiyal A'laa wa bihamdih\" (3x).",ikon:"🧎"},
-    {no:8,judul:"Duduk Antara Dua Sujud",desc:"Duduk iftirasy (kaki kiri diduduki, kaki kanan ditegakkan). Baca: \"Allaahummaghfirlii warhamnii wajburnii wahdinii warzuqnii\".",ikon:"🧘"},
-    {no:9,judul:"Sujud Kedua",desc:"Sujud kembali seperti sujud pertama. Baca tasbih yang sama.",ikon:"🧎"},
-    {no:10,judul:"Berdiri untuk Rakaat Berikutnya",desc:"Bangun untuk rakaat kedua (dan seterusnya). Ulangi dari membaca Al-Fatihah.",ikon:"🧍"},
-    {no:11,judul:"Tasyahud Awal",desc:"Duduk pada rakaat kedua. Baca tasyahud awal. Jari telunjuk tangan kanan diangkat saat membaca \"illallaah\".",ikon:"☝️"},
-    {no:12,judul:"Tasyahud Akhir",desc:"Duduk pada rakaat terakhir. Baca tasyahud akhir, shalawat Nabi, dan doa sebelum salam.",ikon:"📖"},
-    {no:13,judul:"Salam",desc:"Kepala ke kanan: \"Assalaamu 'alaikum wa rahmatullaah\". Kepala ke kiri: \"Assalaamu 'alaikum wa rahmatullaah\".",ikon:"👋"},
+    {no:1,judul:"Niat",desc:"Niat sholat di dalam hati. Tidak diucapkan. Badan tegak menghadap kiblat.",svg:svg.niat},
+    {no:2,judul:"Takbiratul Ihram",desc:"Angkat kedua tangan sejajar telinga, ucapkan: \"Allahu Akbar\". Pandangan ke tempat sujud.",svg:svg.takbir},
+    {no:3,judul:"Berdiri (Qiyam)",desc:"Tangan kanan memegang tangan kiri di dada. Baca doa iftitah, lalu Al-Fatihah dan surah.",svg:svg.berdiri},
+    {no:4,judul:"Rukuk",desc:"Bungkukkan badan hingga punggung lurus. Tangan memegang lutut. Baca: \"Subhaana Rabbiyal 'Azhimi wa bihamdih\" (3x).",svg:svg.rukuk},
+    {no:5,judul:"I'tidal",desc:"Bangkit dari rukuk tegak. Baca: \"Sami'allaahu liman hamidah, Rabbanaa wa lakal hamd\".",svg:svg.itidal},
+    {no:6,judul:"Sujud Pertama",desc:"Turun sujud — dahi, kedua tangan, kedua lutut, kedua kaki menyentuh lantai. Baca: \"Subhaana Rabbiyal A'laa wa bihamdih\" (3x).",svg:svg.sujud},
+    {no:7,judul:"Duduk Antara Sujud",desc:"Duduk iftirasy (kaki kiri diduduki, kaki kanan ditegakkan). Baca: \"Allaahummaghfirlii warhamnii...\"",svg:svg.duduk},
+    {no:8,judul:"Sujud Kedua",desc:"Sujud kembali seperti sujud pertama. Baca tasbih yang sama.",svg:svg.sujud},
+    {no:9,judul:"Tasyahud Awal",desc:"Duduk pada rakaat kedua. Jari telunjuk tangan kanan diangkat saat membaca \"illallaah\".",svg:svg.tasyahud},
+    {no:10,judul:"Tasyahud Akhir",desc:"Duduk pada rakaat terakhir. Baca tasyahud akhir, shalawat Nabi, dan doa sebelum salam.",svg:svg.tasyahud},
+    {no:11,judul:"Salam",desc:"Kepala ke kanan: \"Assalaamu 'alaikum wa rahmatullaah\". Kepala ke kiri: \"Assalaamu 'alaikum wa rahmatullaah\".",svg:svg.salam},
   ];
   view.innerHTML = `
   <main class="wrap">
     <section class="section">
       <h3>🕌 Tata Cara Sholat</h3>
-      <p class="sub">Panduan lengkap shalat fardhu — langkah demi langkah</p>
+      <p class="sub">Panduan lengkap shalat fardhu — langkah demi langkah dengan ilustrasi gerakan</p>
     </section>
-    <div style="display:grid;gap:16px">
+    <div style="display:grid;gap:20px">
       ${langkah.map(l => `
-      <div class="munasabah-card" style="display:flex;gap:16px;align-items:flex-start">
-        <div style="font-size:32px;flex:none">${l.ikon}</div>
-        <div>
-          <div class="rel">${l.no}. ${l.judul}</div>
-          <p style="font-size:14px;color:var(--ink-soft);margin:0">${l.desc}</p>
+      <div class="munasabah-card" style="display:flex;gap:20px;align-items:center">
+        <div style="flex:none;text-align:center;min-width:90px">${l.svg}</div>
+        <div style="flex:1">
+          <div class="rel" style="font-size:15px">${l.no}. ${l.judul}</div>
+          <p style="font-size:14px;color:var(--ink-soft);margin:6px 0 0;line-height:1.6">${l.desc}</p>
         </div>
       </div>
       `).join('')}
     </div>
     <section class="section">
-      <h3>📋 Shalat Sunnah yang Dianjurkan</h3>
-      <div class="surah-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">
+      <h3>📋 Urutan Rakaat Shalat Fardhu</h3>
+      <div class="surah-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">
         ${[
-          {n:"Tahajud",w:"Sepertiga malam terakhir",r:"2-12 rakaat"},
-          {n:"Dhuha",w:"Pukul08-11 pagi",r:"2-12 rakaat"},
-          {n:"Rawatib",w:"Sebelum/shalat wajib",r:"2-12 rakaat"},
+          {n:"Subuh",r:"2 rakaat",j:"Jahr"},
+          {n:"Dzuhur",r:"4 rakaat",j:"Sirr"},
+          {n:"Ashar",r:"4 rakaat",j:"Sirr"},
+          {n:"Maghrib",r:"3 rakaat",j:"Jahr"},
+          {n:"Isya",r:"4 rakaat",j:"Jahr"},
+        ].map(s=>`
+          <div class="sg-item on" style="flex-direction:column;align-items:center;padding:14px;text-align:center">
+            <span style="font-weight:600;color:var(--emerald);font-size:16px">${s.n}</span>
+            <span style="font-size:13px;color:var(--gold)">${s.r}</span>
+            <span style="font-size:11px;color:var(--ink-mute)">${s.j}</span>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+    <section class="section">
+      <h3>⭐ Shalat Sunnah</h3>
+      <div class="surah-grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">
+        ${[
+          {n:"Tahajud",w:"Sepertiga malam",r:"2-12 rakaat"},
+          {n:"Dhuha",w:"Pagi hari",r:"2-12 rakaat"},
+          {n:"Rawatib",w:"Sebelum/sesudah wajib",r:"2-12 rakaat"},
           {n:"Witir",w:"Setelah Isya",r:"1-3 rakaat"},
-          {n:"Tarawih",w:"Bulan Ramadhan",r:"8-20 rakaat"},
-          {n:"Istikharah",w:"Memohon petunjuk",r:"2 rakaat"},
-          {n:"Hajat",w:"Memohon hajat",r:"2 rakaat"},
-          {n:"Taubat",w:"Setelah berdosa",r:"2 rakaat"},
+          {n:"Tarawih",w:"Ramadhan",r:"8-20 rakaat"},
+          {n:"Istikharah",w:"Mohon petunjuk",r:"2 rakaat"},
+          {n:"Hajat",w:"Mohon hajat",r:"2 rakaat"},
+          {n:"Taubat",w:"Mohon ampun",r:"2 rakaat"},
         ].map(s=>`
           <div class="sg-item on" style="flex-direction:column;align-items:flex-start;padding:12px">
             <span style="font-weight:600;color:var(--emerald)">${s.n}</span>
-            <span style="font-size:12px;color:var(--ink-mute)">${s.w}</span>
-            <span style="font-size:12px;color:var(--gold)">${s.r}</span>
+            <span style="font-size:11px;color:var(--ink-mute)">${s.w}</span>
+            <span style="font-size:11px;color:var(--gold)">${s.r}</span>
           </div>
         `).join('')}
       </div>
