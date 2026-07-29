@@ -154,9 +154,13 @@ footer{padding:26px 0 46px;font-size:13px;color:var(--ink-mute);display:flex;jus
   <div class="wrap nav">
     <div class="brand" onclick="location.hash=''"><h1>Quran Mapping</h1><span>114 SURAH, SATU PETA</span></div>
     <nav class="nav-links">
-      <a href="#" onclick="location.hash='';return false;">Daftar surah</a>
-      <a href="#/surah/1">Al-Fatihah</a>
-      <a href="#/rujukan">Rujukan</a>
+      <a href="#" onclick="location.hash='';return false;">Surah</a>
+      <a href="#/asmaul-husna">Asmaul Husna</a>
+      <a href="#/doa-sholat">Doa Sholat</a>
+      <a href="#/tata-sholat">Tata Cara</a>
+      <a href="#/doa-harian">Doa Harian</a>
+      <a href="#/wirid">Wirid</a>
+      <a href="#/tajwid">Tajwid</a>
       <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema">🌙</button>
     </nav>
   </div>
@@ -600,6 +604,13 @@ function route(){
   const m = location.hash.match(/^#\/surah\/(\d+)$/);
   if(m) renderSurah(parseInt(m[1]));
   else if(location.hash === '#/rujukan') renderRujukan();
+  else if(location.hash === '#/asmaul-husna') renderAsmaulHusna();
+  else if(location.hash === '#/doa-sholat') renderDoaSholat();
+  else if(location.hash === '#/tata-sholat') renderTataSholat();
+  else if(location.hash === '#/doa-harian') renderDoaHarian();
+  else if(location.hash === '#/wirid') renderWirid();
+  else if(location.hash === '#/tajwid') renderTajwid();
+  else if(location.hash === '#/bookmarks') renderBookmarks();
   else renderHome();
 }
 window.addEventListener('hashchange', route);
@@ -671,6 +682,362 @@ document.addEventListener('click', (e)=>{
     if(panel) panel.classList.toggle('show');
   }
 });
+
+// ==================== ASMAUL HUSNA ====================
+const ASMAUL_HUSNA = [
+  {no:1,ar:"اللَّهُ",lat:"Allāhu",arti:"Allah (Nama Utama)"},
+  {no:2,ar:"الرَّحْمَٰنُ",lat:"Ar-Raḥmānu",arti:"Yang Maha Pengasih"},
+  {no:3,ar:"الرَّحِيمُ",lat:"Ar-Raḥīmu",arti:"Yang Maha Penyayang"},
+  {no:4,ar:"الْمَلِكُ",lat:"Al-Maliku",arti:"Yang Maha Merajai"},
+  {no:5,ar:"الُُدُّوسُ",lat:"Al-Quddūsu",arti:"Yang Maha Suci"},
+  {no:6,ar:"السَّلَامُ",lat:"As-Salāmu",arti:"Yang Maha Sejahtera"},
+  {no:7,ar:"الْمُؤْمِنُ",lat:"Al-Mu'minu",arti:"Yang Memberi Keamanan"},
+  {no:8,ar:"الْمُهَيْمِنُ",lat:"Al-Muhaiminu",arti:"Yang Maha Mengawasi"},
+  {no:9,ar:"الْعَزِيزُ",lat:"Al-'Azīzu",arti:"Yang Maha Perkasa"},
+  {no:10,ar:"الْجَبَّارُ",lat:"Al-Jabbāru",arti:"Yang Maha Kuasa"},
+  {no:11,ar:"الْمُتَكَبِّرُ",lat:"Al-Mutakabbiru",arti:"Yang Maha Megah"},
+  {no:12,ar:"الْخَالِقُ",lat:"Al-Khāliqu",arti:"Yang Maha Pencipta"},
+  {no:13,ar:"الْبَارِئُ",lat:"Al-Bāri'u",arti:"Yang Maha Melepaskan"},
+  {no:14,ar:"الْمُصَوِّرُ",lat:"Al-Muṣawwiru",arti:"Yang Maha Membentuk Rupa"},
+  {no:15,ar:"الْغَفَّارُ",lat:"Al-Gaffāru",arti:"Yang Maha Pengampun"},
+  {no:16,ar:"الْقَهَّارُ",lat:"Al-Qahhāru",arti:"Yang Maha Memaksa"},
+  {no:17,ar:"الْوَهَّابُ",lat:"Al-Wahhābu",arti:"Yang Maha Pemberi"},
+  {no:18,ar:"الرَّزَّاقُ",lat:"Ar-Razzāqu",arti:"Yang Maha Pemberi Rezeki"},
+  {no:19,ar:"الْفَتَّاحُ",lat:"Al-Fattāḥu",arti:"Yang Maha Pembuka"},
+  {no:20,ar:"اَلْعَلِيمُ",lat:"Al-'Alīmu",arti:"Yang Maha Mengetahui"},
+  {no:21,ar:"الْقَابِضُ",lat:"Al-Qābiḍu",arti:"Yang Maha Menyempitkan"},
+  {no:22,ar:"الْبَاسِطُ",lat:"Al-Bāsiṭu",arti:"Yang Maha Melapangkan"},
+  {no:23,ar:"الْخَافِضُ",lat:"Al-Khāfiḍu",arti:"Yang Maha Merendahkan"},
+  {no:24,ar:"الرَّافِعُ",lat:"Ar-Rāfi'u",arti:"Yang Maha Meninggikan"},
+  {no:25,ar:"الْمُعِزُّ",lat:"Al-Mu'izzu",arti:"Yang Maha Memuliakan"},
+  {no:26,ar:"المُذِلُّ",lat:"Al-Mużillu",arti:"Yang Maha Menghinakan"},
+  {no:27,ar:"السَّمِيعُ",lat:"As-Samī'u",arti:"Yang Maha Mendengar"},
+  {no:28,ar:"الْبَصِيرُ",lat:"Al-Baṣīru",arti:"Yang Maha Melihat"},
+  {no:29,ar:"الْحَكَمُ",lat:"Al-Ḥakamu",arti:"Yang Maha Menetapkan"},
+  {no:30,ar:"الْعَدْلُ",lat:"Al-'Adlu",arti:"Yang Maha Adil"},
+  {no:31,ar:"اللَّطِيفُ",lat:"Al-Laṭīfu",arti:"Yang Maha Lembut"},
+  {no:32,ar:"الْخَبِيرُ",lat:"Al-Khabīru",arti:"Yang Maha Mengenal"},
+  {no:33,ar:"الْحَلِيمُ",lat:"Al-Ḥalīmu",arti:"Yang Maha Penyantun"},
+  {no:34,ar:"الْعَظِيمُ",lat:"Al-'Aẓīmu",arti:"Yang Maha Agung"},
+  {no:35,ar:"الْغَفُورُ",lat:"Al-Gafūru",arti:"Yang Maha Pengampun"},
+  {no:36,ar:"الشَّكُورُ",lat:"Asy-Syakūru",arti:"Yang Maha Pembalas Kebaikan"},
+  {no:37,ar:"الْعَلِيُّ",lat:"Al-'Aliyyu",arti:"Yang Maha Tinggi"},
+  {no:38,ar:"الْكَبِيرُ",lat:"Al-Kabīru",arti:"Yang Maha Besar"},
+  {no:39,ar:"الْحَفِيظُ",lat:"Al-Ḥafīẓu",arti:"Yang Maha Memelihara"},
+  {no:40,ar:"المُقيِت",lat:"Al-Muqītu",arti:"Yang Maha Pemberi Kecukupan"},
+  {no:41,ar:"الْحسِيبُ",lat:"Al-Ḥasību",arti:"Yang Maha Membuat Perhitungan"},
+  {no:42,ar:"الْجَلِيلُ",lat:"Al-Jalīlu",arti:"Yang Maha Mulia"},
+  {no:43,ar:"الْكَرِيمُ",lat:"Al-Karīmu",arti:"Yang Maha Pemurah"},
+  {no:44,ar:"الرَّقِيبُ",lat:"Ar-Raqību",arti:"Yang Maha Mengawasi"},
+  {no:45,ar:"الْمُجِيبُ",lat:"Al-Mujību",arti:"Yang Maha Mengabulkan"},
+  {no:46,ar:"الْوَاسِعُ",lat:"Al-Wāsi'u",arti:"Yang Maha Luas"},
+  {no:47,ar:"الْحَكِيمُ",lat:"Al-Ḥakīmu",arti:"Yang Maha Bijaksana"},
+  {no:48,ar:"الْوَدُودُ",lat:"Al-Wadūdu",arti:"Yang Maha Mengasihi"},
+  {no:49,ar:"الْمَجِيدُ",lat:"Al-Majīdu",arti:"Yang Maha Mulia"},
+  {no:50,ar:"الْبَاعِثُ",lat:"Al-Bā'iṡu",arti:"Yang Maha Membangkitkan"},
+  {no:51,ar:"الشَّهِيدُ",lat:"Asy-Syahīdu",arti:"Yang Maha Menyaksikan"},
+  {no:52,ar:"الْحَقُّ",lat:"Al-Ḥaqqu",arti:"Yang Maha Benar"},
+  {no:53,ar:"الْوَكِيلُ",lat:"Al-Wakīlu",arti:"Yang Maha Memelihara"},
+  {no:54,ar:"الْقَوِيُّ",lat:"Al-Qawiyyu",arti:"Yang Maha Kuat"},
+  {no:55,ar:"الْمَتِينُ",lat:"Al-Matīnu",arti:"Yang Maha Kokoh"},
+  {no:56,ar:"الْوَلِيُّ",lat:"Al-Waliyyu",arti:"Yang Maha Melindungi"},
+  {no:57,ar:"الْحَمِيدُ",lat:"Al-Ḥamīdu",arti:"Yang Maha Terpuji"},
+  {no:58,ar:"الْمُحْصِي",lat:"Al-Muḥṣī",arti:"Yang Maha Menghitung"},
+  {no:59,ar:"الْمُبْدِئُ",lat:"Al-Mubdi'u",arti:"Yang Maha Memulai"},
+  {no:60,ar:"الْمُعِيدُ",lat:"Al-Mu'īdu",arti:"Yang Maha Mengembalikan"},
+  {no:61,ar:"الْمُحْيِي",lat:"Al-Muḥyī",arti:"Yang Maha Menghidupkan"},
+  {no:62,ar:"اَلْمُمِيتُ",lat:"Al-Mumītu",arti:"Yang Maha Mematikan"},
+  {no:63,ar:"الْحَيُّ",lat:"Al-Ḥayyu",arti:"Yang Maha Hidup"},
+  {no:64,ar:"الْقَيُّومُ",lat:"Al-Qayyūmu",arti:"Yang Maha Berdiri Sendiri"},
+  {no:65,ar:"الْوَاجِدُ",lat:"Al-Wājidu",arti:"Yang Maha Menemukan"},
+  {no:66,ar:"الْمَاجِدُ",lat:"Al-Mājidu",arti:"Yang Maha Mulia"},
+  {no:67,ar:"الْواحِدُ",lat:"Al-Wāḥidu",arti:"Yang Maha Tunggal"},
+  {no:68,ar:"اَلاَحَدُ",lat:"Al-Aḥadu",arti:"Yang Maha Esa"},
+  {no:69,ar:"الصَّمَدُ",lat:"Aṣ-Ṣamadu",arti:"Yang Maha Dibutuhkan"},
+  {no:70,ar:"الْقَادِرُ",lat:"Al-Qādiru",arti:"Yang Maha Menentukan"},
+  {no:71,ar:"الْمُقْتَدِرُ",lat:"Al-Muqtadiru",arti:"Yang Maha Berkuasa"},
+  {no:72,ar:"الْمُقَدِّمُ",lat:"Al-Muqaddimu",arti:"Yang Maha Mendahulukan"},
+  {no:73,ar:"الْمُؤَخِّرُ",lat:"Al-Mu'akhkhiru",arti:"Yang Maha Mengakhirkan"},
+  {no:74,ar:"الأوَّلُ",lat:"Al-Awwalu",arti:"Yang Maha Awal"},
+  {no:75,ar:"الآخِرُ",lat:"Al-Ākhiru",arti:"Yang Maha Akhir"},
+  {no:76,ar:"الظَّاهِرُ",lat:"Aẓ-Ẓāhiru",arti:"Yang Maha Nyata"},
+  {no:77,ar:"الْبَاطِنُ",lat:"Al-Bāṭinu",arti:"Yang Maha Tersembunyi"},
+  {no:78,ar:"الْوَالِي",lat:"Al-Wālī",arti:"Yang Maha Memerintah"},
+  {no:79,ar:"الْمُتَعَالِي",lat:"Al-Muta'ālī",arti:"Yang Maha Tinggi"},
+  {no:80,ar:"الْبَرُّ",lat:"Al-Barru",arti:"Yang Maha Baik"},
+  {no:81,ar:"التَّوَّابُ",lat:"At-Tawwābu",arti:"Yang Maha Penerima Taubat"},
+  {no:82,ar:"الْمُنْتَقِمُ",lat:"Al-Muntaqimu",arti:"Yang Maha Pembalas"},
+  {no:83,ar:"العَفُوُّ",lat:"Al-'Afuwwu",arti:"Yang Maha Pemaaf"},
+  {no:84,ar:"الرَّؤُوفُ",lat:"Ar-Ra'ūfu",arti:"Yang Maha Pengasih"},
+  {no:85,ar:"مَالِكُ الْمُلْكِ",lat:"Mālikul-Mulk",arti:"Raja Segala Kerajaan"},
+  {no:86,ar:"ذُوالْجَلاَلِ وَالإكْرَامِ",lat:"Żul-Jalāli wal-Ikrām",arti:"Pemilik Keagungan dan Kemuliaan"},
+  {no:87,ar:"الْمُقْسِطُ",lat:"Al-Muqsiṭu",arti:"Yang Maha Adil"},
+  {no:88,ar:"الْجَامِعُ",lat:"Al-Jāmi'u",arti:"Yang Maha Mengumpulkan"},
+  {no:89,ar:"الْغَنِيُّ",lat:"Al-Ganiyyu",arti:"Yang Maha Kaya"},
+  {no:90,ar:"الْمُغْنِي",lat:"Al-Mugnī",arti:"Yang Maha Memberi Kekayaan"},
+  {no:91,ar:"اَلْمَانِعُ",lat:"Al-Māni'u",arti:"Yang Maha Mencegah"},
+  {no:92,ar:"الضَّارَّ",lat:"Aḍ-Ḍārra",arti:"Yang Maha Menimpakan Bahaya"},
+  {no:93,ar:"النَّافِعُ",lat:"An-Nāfi'u",arti:"Yang Maha Memberi Manfaat"},
+  {no:94,ar:"النُّورُ",lat:"An-Nūru",arti:"Yang Maha Bercahaya"},
+  {no:95,ar:"الْهَادِي",lat:"Al-Hādī",arti:"Yang Maha Pemberi Petunjuk"},
+  {no:96,ar:"الْبَدِيعُ",lat:"Al-Badī'u",arti:"Yang Maha Pencipta"},
+  {no:97,ar:"اَلْبَاقِي",lat:"Al-Bāqī",arti:"Yang Maha Kekal"},
+  {no:98,ar:"الْوَارِثُ",lat:"Al-Wāriṡu",arti:"Yang Maha Pewaris"},
+  {no:99,ar:"الرَّشِيدُ",lat:"Ar-Rasyīdu",arti:"Yang Maha Pandai"},
+];
+
+function renderAsmaulHusna(){
+  stopAudio();
+  view.innerHTML = `
+  <main class="wrap">
+    <section class="section">
+      <h3>✨ Asmaul Husna</h3>
+      <p class="sub">99 Nama Allah Yang Maha Indah — beserta makna dan artinya</p>
+    </section>
+    <div class="surah-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">
+      ${ASMAUL_HUSNA.map(n => `
+        <div class="sg-item on" style="flex-direction:column;align-items:flex-start;padding:14px">
+          <span style="color:var(--gold);font-size:11px;font-weight:600">${n.no}</span>
+          <span style="font-family:var(--arabic);font-size:28px;color:var(--emerald-deep);direction:rtl;width:100%;text-align:right">${n.ar}</span>
+          <span style="font-size:13px;font-style:italic;color:var(--emerald)">${n.lat}</span>
+          <span style="font-size:13px;color:var(--ink-soft)">${n.arti}</span>
+        </div>
+      `).join('')}
+    </div>
+  </main>`;
+  window.scrollTo(0,0);
+}
+
+// ==================== DOA SHOLAT ====================
+function renderDoaSholat(){
+  stopAudio();
+  const doa = [
+    {judul:"Doa Iftitah",ar:"اللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلًا",lat:"Allāhu akbaru kabīrā, wal-ḥamdu lillāhi kaṡīrā, wa subḥānallāhi bukratan wa aṣīlā",tr:"Allah Maha Besar dengan segala kebesaran, segala puji bagi Allah dengan pujian yang banyak, dan Maha Suci Allah baik pagi maupun petang."},
+    {judul:"Doa Iftitah Kedua",ar:"إِنِّي وَجَّهْتُ وَجْهِيَ لِلَّذِي فَطَرَ السَّمَاوَاتِ وَالْأَرْضَ حَنِيفًا وَمَا أَنَا مِنَ الْمُشْرِكِينَ",lat:"Innī wajjahtu wajhiya lillażī faṭaras-samāwāti wal-arḍa ḥanīfaw wa mā ana minal-musyrikīn",tr:"Sesungguhnya aku hadapkan wajahku kepada Allah yang menciptakan langit dan bumi dengan cenderung kepada agama yang benar, dan aku bukanlah termasuk orang-orang musyrik."},
+    {judul:"Ruku - Tasbih",ar:"سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ",lat:"Subḥāna rabbiyal-'aẓīmi wa bi ḥamdih",tr:"Maha Suci Tuhanku Yang Maha Agung dan dengan pujian-Nya."},
+    {judul:"I'tidal - Doa",ar:"سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ رَبَّنَا وَلَكَ الْحَمْدُ",lat:"Sami'allāhu liman ḥamidah, rabbanā wa lakal-ḥamdu",tr:"Allah mendengar orang yang memuji-Nya. Ya Tuhan kami, bagi-Mu segala puji."},
+    {judul:"Sujud - Tasbih",ar:"سُبْحَانَ رَبِّيَ الْأَعْلَى وَبِحَمْدِهِ",lat:"Subḥāna rabbiyal-a'lā wa bi ḥamdih",tr:"Maha Suci Tuhanku Yang Maha Tinggi dan dengan pujian-Nya."},
+    {judul:"Duduk Antara Dua Sujud",ar:"اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَاجْبُرْنِي وَاهْدِنِي وَارْزُقْنِي",lat:"Allāhummagfir lī warḥamnī wajburnī wahdinī warzuqnī",tr:"Ya Allah, ampunilah aku, rahmatilah aku, cukupkanlah aku, berilah aku petunjuk, dan berilah aku rezeki."},
+    {judul:"Tasyahud Awal",ar:"التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",lat:"At-taḥiyyātu lillāhi waṣ-ṣalawātu waṭ-ṭayyibāt, as-salāmu 'alaika ayyuhan-nabiyyu wa raḥmatullāhi wa barakātuh",tr:"Segala penghormatan, shalat, dan kebaikan adalah milik Allah. Semoga keselamatan, rahmat, dan berkah Allah tercurah kepadamu, wahai Nabi."},
+    {judul:"Tasyahud Akhir",ar:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",lat:"Allāhumma ṣalli 'alā muḥammadaw wa 'alā āli muḥammadin kamā ṣallaita 'alā ibrāhīma wa 'alā āli ibrāhīma innaka ḥamīdun majīd",tr:"Ya Allah, limpahkanlah shalawat kepada Muhammad dan keluarganya, sebagaimana Engkau limpahkan shalawat kepada Ibrahim dan keluarganya. Sesungguhnya Engkau Maha Terpuji lagi Maha Mulia."},
+    {judul:"Doa Sebelum Salam",ar:"اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنتَ فَاغْفِرْ لِي مَغْفِرَةً مِّنْ عِندِكَ وَارْحَمْنِي إِنَّكَ أَنتَ الْغَفُورُ الرَّحِيمُ",lat:"Allāhumma innī ẓalamtu nafsī ẓulman kaṡīrā wa lā yagfirudz-dzūnūba illā anta fagfir lī magfiratan min 'indika warḥamnī innaka antal-gafūrur-raḥīm",tr:"Ya Allah, sesungguhnya aku telah menzalimi diriku dengan kezaliman yang banyak, dan tidak ada yang mengampuni dosa selain Engkau, maka berilah aku ampunan dari sisi-Mu dan rahmatilah aku. Sesungguhnya Engkau Maha Pengampun lagi Maha Penyayang."},
+  ];
+  view.innerHTML = `
+  <main class="wrap">
+    <section class="section">
+      <h3>📿 Doa Sholat</h3>
+      <p class="sub">Doa-doa yang dibaca dalam shalat — dari iftitah hingga sebelum salam</p>
+    </section>
+    ${doa.map((d,i) => `
+    <div class="ayat" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <span class="num" style="width:30px;height:30px;font-size:12px">${i+1}</span>
+        <span style="font-weight:600;color:var(--gold);font-size:14px">${d.judul}</span>
+      </div>
+      <p class="ar" style="text-align:center;margin-bottom:12px">${d.ar}</p>
+      <p class="latin" style="text-align:center;margin-bottom:8px">${d.lat}</p>
+      <p class="tr" style="text-align:center">${d.tr}</p>
+    </div>
+    `).join('')}
+  </main>`;
+  window.scrollTo(0,0);
+}
+
+// ==================== TATA CARA SHOLAT ====================
+function renderTataSholat(){
+  stopAudio();
+  const langkah = [
+    {no:1,judul:"Niat",desc:"Niat sholat di dalam hati. Tidak diucapkan. Contoh: \"Ushallii fardhadh-dhuhri arba'a raka'aatin mustaqbilal qiblati adaa'an lillaahi ta'aalaa\" (Aku niat shalat fardhu Dzuhur empat rakaat menghadap kibat karena Allah Ta'ala).",ikon:"🕌"},
+    {no:2,judul:"Takbiratul Ihram",desc:"Angkat kedua tangan sejajar telinga atau bahu, lalu ucapkan: \"Allahu Akbar\". Pandangan ke tempat sujud.",ikon:"🤲"},
+    {no:3,judul:"Membaca Doa Iftitah",desc:"Setelah takbir, baca doa iftitah. Posisi tangan: tangan kanan memegang tangan kiri di dada.",ikon:"📖"},
+    {no:4,judul:"Membaca Al-Fatihah",desc:"Wajib dibaca di setiap ruka't. Dibaca pelan (sirr) pada shalat Dzuhur dan Ashar, dan keras (jahr) pada Subuh, Maghrib, Isya.",ikon:"📖"},
+    {no:5,judul:"Rukuk",desc:"Bungkukkan badan hingga punggung lurus. Tangan memegang lutut. Baca: \"Subhaana Rabbiyal 'Azhimi wa bihamdih\" (3x).",ikon:"🧎"},
+    {no:6,judul:"I'tidal",desc:"Bangkit dari rukuk tegak. Baca: \"Sami'allaahu liman hamidah, Rabbanaa wa lakal hamd\".",ikon:"🧍"},
+    {no:7,judul:"Sujud Pertama",desc:"Turun sujud dengan tujuh anggota badan menyentuh lantai (dahi, kedua tangan, kedua lutut, kedua kaki). Baca: \"Subhaana Rabbiyal A'laa wa bihamdih\" (3x).",ikon:"🧎"},
+    {no:8,judul:"Duduk Antara Dua Sujud",desc:"Duduk iftirasy (kaki kiri diduduki, kaki kanan ditegakkan). Baca: \"Allaahummaghfirlii warhamnii wajburnii wahdinii warzuqnii\".",ikon:"🧘"},
+    {no:9,judul:"Sujud Kedua",desc:"Sujud kembali seperti sujud pertama. Baca tasbih yang sama.",ikon:"🧎"},
+    {no:10,judul:"Berdiri untuk Rakaat Berikutnya",desc:"Bangun untuk rakaat kedua (dan seterusnya). Ulangi dari membaca Al-Fatihah.",ikon:"🧍"},
+    {no:11,judul:"Tasyahud Awal",desc:"Duduk pada rakaat kedua. Baca tasyahud awal. Jari telunjuk tangan kanan diangkat saat membaca \"illallaah\".",ikon:"☝️"},
+    {no:12,judul:"Tasyahud Akhir",desc:"Duduk pada rakaat terakhir. Baca tasyahud akhir, shalawat Nabi, dan doa sebelum salam.",ikon:"📖"},
+    {no:13,judul:"Salam",desc:"Kepala ke kanan: \"Assalaamu 'alaikum wa rahmatullaah\". Kepala ke kiri: \"Assalaamu 'alaikum wa rahmatullaah\".",ikon:"👋"},
+  ];
+  view.innerHTML = `
+  <main class="wrap">
+    <section class="section">
+      <h3>🕌 Tata Cara Sholat</h3>
+      <p class="sub">Panduan lengkap shalat fardhu — langkah demi langkah</p>
+    </section>
+    <div style="display:grid;gap:16px">
+      ${langkah.map(l => `
+      <div class="munasabah-card" style="display:flex;gap:16px;align-items:flex-start">
+        <div style="font-size:32px;flex:none">${l.ikon}</div>
+        <div>
+          <div class="rel">${l.no}. ${l.judul}</div>
+          <p style="font-size:14px;color:var(--ink-soft);margin:0">${l.desc}</p>
+        </div>
+      </div>
+      `).join('')}
+    </div>
+    <section class="section">
+      <h3>📋 Shalat Sunnah yang Dianjurkan</h3>
+      <div class="surah-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">
+        ${[
+          {n:"Tahajud",w:"Sepertiga malam terakhir",r:"2-12 rakaat"},
+          {n:"Dhuha",w:"Pukul08-11 pagi",r:"2-12 rakaat"},
+          {n:"Rawatib",w:"Sebelum/shalat wajib",r:"2-12 rakaat"},
+          {n:"Witir",w:"Setelah Isya",r:"1-3 rakaat"},
+          {n:"Tarawih",w:"Bulan Ramadhan",r:"8-20 rakaat"},
+          {n:"Istikharah",w:"Memohon petunjuk",r:"2 rakaat"},
+          {n:"Hajat",w:"Memohon hajat",r:"2 rakaat"},
+          {n:"Taubat",w:"Setelah berdosa",r:"2 rakaat"},
+        ].map(s=>`
+          <div class="sg-item on" style="flex-direction:column;align-items:flex-start;padding:12px">
+            <span style="font-weight:600;color:var(--emerald)">${s.n}</span>
+            <span style="font-size:12px;color:var(--ink-mute)">${s.w}</span>
+            <span style="font-size:12px;color:var(--gold)">${s.r}</span>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  </main>`;
+  window.scrollTo(0,0);
+}
+
+// ==================== DOA HARIAN ====================
+function renderDoaHarian(){
+  stopAudio();
+  const doa = [
+    {judul:"Sebelum Makan",ar:"بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ",lat:"Bismillāhi wa 'alā barakatillāh",tr:"Dengan nama Allah dan atas berkah Allah."},
+    {judul:"Sesudah Makan",ar:"الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",lat:"Al-ḥamdu lillāhil-lażī aṭ'amanā wa saqānā wa ja'alanā muslimīn",tr:"Segala puji bagi Allah yang memberi kami makan dan minum serta menjadikan kami orang-orang Islam."},
+    {judul:"Sebelum Tidur",ar:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",lat:"Bismika Allāhumma amūtu wa aḥyā",tr:"Dengan nama-Mu ya Allah, aku mati dan aku hidup."},
+    {judul:"Bangun Tidur",ar:"الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَمَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",lat:"Al-ḥamdu lillāhil-lażī aḥyānā ba'da mā amātanā wa ilaihin-nusyūr",tr:"Segala puji bagi Allah yang menghidupkan kami setelah mematikan kami, dan kepada-Nya kami kembali."},
+    {judul:"Masuk Masjid",ar:"اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",lat:"Allāhummaftaḥ lī abwāba raḥmatik",tr:"Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu."},
+    {judul:"Keluar Masjid",ar:"اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",lat:"Allāhumma innī as'aluka min faḍlik",tr:"Ya Allah, sesungguhnya aku memohon keutamaan-Mu."},
+    {judul:"Masuk Rumah",ar:"بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا",lat:"Bismillāhi walajnā wa bismillāhi kharajnā wa 'alāllāhi rabbinā tawakkalnā",tr:"Dengan nama Allah kami masuk, dengan nama Allah kami keluar, dan kepada Allah Tuhan kami, kami bertawakal."},
+    {judul:"Keluar Rumah",ar:"بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",lat:"Bismillāhi tawakkaltu 'alāllāhi wa lā ḥaula wa lā quwwata illā billāh",tr:"Dengan nama Allah, aku bertawakal kepada Allah, dan tiada daya dan kekuatan kecuali dengan pertolongan Allah."},
+    {judul:"Ketika Hujan",ar:"اللَّهُمَّ صَيِّبًا نَّافِعًا",lat:"Allāhumma ṣayyiban nāfi'ā",tr:"Ya Allah, jadikanlah hujan yang bermanfaat."},
+    {judul:"Setelah Hujan",ar:"مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ",lat:"Muṭirnā bi faḍlillāhi wa raḥmatih",tr:"Kami diberi hujan dengan karunia dan rahmat Allah."},
+    {judul:"Masuk Kamar Mandi",ar:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",lat:"Allāhumma innī a'ūżu bika minal-khubṡi wal-khabā'iṡ",tr:"Ya Allah, sesungguhnya aku berlindung kepada-Mu dari kejahatan setan laki-laki dan setan perempuan."},
+    {judul:"Keluar Kamar Mandi",ar:"غُفْرَانَكَ",lat:"Gufraanak",tr:"Aku memohon ampunan-Mu."},
+    {judul:"Ketika Bercermin",ar:"اللَّهُمَّ كَمَا حَسَّنْتَ خَلْقِي فَحَسِّنْ خُلُقِي",lat:"Allāhumma kamā ḥassanta khalqī fa ḥassin khuluqī",tr:"Ya Allah, sebagaimana Engkau indahkan rupaku, maka indahkanlah akhlakku."},
+    {judul:"Ketika Sakit",ar:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",lat:"A'ūżu bikalimātillāhit-tāmmāti min syarri mā khalaq",tr:"Aku berlindung dengan kalimat-kalimat Allah yang sempurna dari kejahatan makhluk yang diciptakan-Nya."},
+    {judul:"Ketika Marah",ar:"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",lat:"A'ūżu billāhi minasy-syaiṭānir-rajīm",tr:"Aku berlindung kepada Allah dari godaan setan yang terkutuk."},
+  ];
+  view.innerHTML = `
+  <main class="wrap">
+    <section class="section">
+      <h3>🤲 Doa Harian</h3>
+      <p class="sub">Doa-doa sehari-hari yang dianjurkan dalam Islam</p>
+    </section>
+    ${doa.map((d,i) => `
+    <div class="ayat" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <span class="num" style="width:30px;height:30px;font-size:12px">${i+1}</span>
+        <span style="font-weight:600;color:var(--gold);font-size:14px">${d.judul}</span>
+      </div>
+      <p class="ar" style="text-align:center;margin-bottom:12px">${d.ar}</p>
+      <p class="latin" style="text-align:center;margin-bottom:8px">${d.lat}</p>
+      <p class="tr" style="text-align:center">${d.tr}</p>
+    </div>
+    `).join('')}
+  </main>`;
+  window.scrollTo(0,0);
+}
+
+// ==================== WIRID/DZIKIR ====================
+function renderWirid(){
+  stopAudio();
+  const wirid = [
+    {judul:"Istighfar",ar:"أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ",lat:"Astaghfirullāhal-'aẓīm",tr:"Aku memohon ampun kepada Allah Yang Maha Agung.",jml:"100x",waktu:"Pagi & Petang"},
+    {judul:"Tasbih",ar:"سُبْحَانَ اللَّهِ",lat:"Subḥānallāh",tr:"Maha Suci Allah.",jml:"33x",waktu:"Setelah shalat"},
+    {judul:"Tahmid",ar:"الْحَمْدُ لِلَّهِ",lat:"Al-ḥamdu lillāh",tr:"Segala puji bagi Allah.",jml:"33x",waktu:"Setelah shalat"},
+    {judul:"Takbir",ar:"اللَّهُ أَكْبَرُ",lat:"Allāhu akbar",tr:"Allah Maha Besar.",jml:"33x",waktu:"Setelah shalat"},
+    {judul:"Tahlil",ar:"لَا إِلٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",lat:"Lā ilāha illallāhu waḥdahū lā syarīka lah, lahul-mulku wa lahul-ḥamdu wa huwa 'alā kulli syai'in qadīr",tr:"Tiada Tuhan selain Allah semata, tiada sekutu bagi-Nya. Milik-Nya segala kerajaan dan bagi-Nya segala puji, dan Dia Maha Kuasa atas segala sesuatu.",jml:"10x",waktu:"Pagi & Petang"},
+    {judul:"Hawqalah",ar:"لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",lat:"Lā ḥaula wa lā quwwata illā billāh",tr:"Tiada daya dan kekuatan kecuali dengan pertolongan Allah.",jml:"100x",waktu:"Kapan saja"},
+    {judul:"Shalawat",ar:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ",lat:"Allāhumma ṣalli 'alā muḥammadaw wa 'alā āli muḥammad",tr:"Ya Allah, limpahkanlah shalawat kepada Muhammad dan keluarganya.",jml:"100x",waktu:"Pagi & Petang"},
+    {judul:"Ayat Kursi",ar:"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ...",lat:"Allāhu lā ilāha illā huwal-ḥayyul-qayyūm...",tr:"Allah, tiada Tuhan selain Dia, Yang Maha Hidup, Yang Berdiri Sendiri...",jml:"1x",waktu:"Setelah shalat & sebelum tidur"},
+  ];
+  view.innerHTML = `
+  <main class="wrap">
+    <section class="section">
+      <h3>📿 Wirid & Dzikir</h3>
+      <p class="sub">Dzikir dan wirid yang dianjurkan — pagi, petang, dan setelah shalat</p>
+    </section>
+    ${wirid.map((w,i) => `
+    <div class="ayat" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <span class="num" style="width:30px;height:30px;font-size:12px">${i+1}</span>
+        <span style="font-weight:600;color:var(--gold);font-size:14px">${w.judul}</span>
+        <span style="font-size:11px;color:var(--ink-mute);margin-left:auto">${w.jml} · ${w.waktu}</span>
+      </div>
+      <p class="ar" style="text-align:center;margin-bottom:12px">${w.ar}</p>
+      <p class="latin" style="text-align:center;margin-bottom:8px">${w.lat}</p>
+      <p class="tr" style="text-align:center">${w.tr}</p>
+    </div>
+    `).join('')}
+    <section class="section">
+      <h3>⏰ Waktu Dzikir</h3>
+      <div class="surah-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">
+        ${[
+          {w:"Pagi",j:"Setelah Subuh hingga terbit matahari",d:"Istighfar, Ayat Kursi, Shalawat, Tasbih Tahmid Takbir"},
+          {w:"Petang",j:"Setelah Ashar hingga Maghrib",d:"Istighfar, Ayat Kursi, Shalawat, Tasbih Tahmid Takbir"},
+          {w:"Setelah Shalat",j:"Langsung setelah salam",d:"Tasbih33x, Tahmid33x, Takbir33x, Tahlil1x"},
+          {w:"Sebelum Tidur",j:"Sebelum memejamkan mata",d:"Ayat Kursi, Al-Ikhlas, Al-Falaq, An-Nas"},
+        ].map(w=>`
+          <div class="sg-item on" style="flex-direction:column;align-items:flex-start;padding:12px">
+            <span style="font-weight:600;color:var(--emerald)">${w.w}</span>
+            <span style="font-size:12px;color:var(--ink-mute)">${w.j}</span>
+            <span style="font-size:12px;color:var(--gold)">${w.d}</span>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  </main>`;
+  window.scrollTo(0,0);
+}
+
+// ==================== TAJWID DASAR ====================
+function renderTajwid(){
+  stopAudio();
+  const tajwid = [
+    {hukum:"Izhar",warna:"#e74c3c",desc:"Jelas. Nun sukun/tanwin bertemu huruf: ء ه ع ح غ خ. Huruf dibaca jelas tanpa dengung.",contoh:"مِنْ هَادٍ (min hādin)"},
+    {hukum:"Iqlab",warna:"#9b59b6",desc:"Berubah. Nun sukun/tanwin bertemu ب. Nun berubah menjadi mim, dibaca dengan dengung.",contoh:"سَمِيعٌ بَصِيرٌ (samī'um baṣīr)"},
+    {hukum:"Idgham",warna:"#2ecc71",desc:"Melebur. Nun sukun/tanwin bertemu: ي ر م ل و ن. Huruf dilebur, ada dengung kecuali ر ل.",contoh:"مِن رَّبِّهِمْ (mir rabbihim)"},
+    {hukum:"Ikhfa",warna:"#f39c12",desc:"Samar. Nun sukun/tanwin bertemu15 huruf lainnya. Huruf dibaca samar antara izhar dan idgham.",contoh:"مِن قَبْلِكُمْ (min qablikum)"},
+    {hukum:"Qalqalah",warna:"#3498db",desc:"Memantul. Huruf ق ط ب ج د dalam keadaan sukun. Huruf dipantulkan bunyinya.",contoh:"يَقْطَعْ (yaqṭa')"},
+    {hukum:"Ghunnah",warna:"#1abc9c",desc:"Dengung. Huruf ن dan م yang bertasydid. Didengungkan2 harakat.",contoh:"إِنَّ (inna), أَمَّا (ammā)"},
+    {hukum:"Mad",warna:"#e67e22",desc:"Panjang. Huruf ا و ي yang sukun setelah huruf berharakat. Dibaca panjang2-4-6 harakat.",contoh:"قَالَ (qāla), يَقُولُ (yaqūlu)"},
+    {hukum:"Tafkhim",warna:"#c0392b",desc:"Tebal. Huruf خ ص ض غ ط ظ ق dibaca tebal/fat.",contoh:"الضَّالِّينَ (aḍ-ḍāllīn)"},
+    {hukum:"Tarqiq",warna:"#2980b9",desc:"Tipis. Huruf selain huruf tafkhim dibaca tipis.",contoh:"بِسْمِ (bismi)"},
+  ];
+  view.innerHTML = `
+  <main class="wrap">
+    <section class="section">
+      <h3>🎯 Tajwid Dasar</h3>
+      <p class="sub">Hukum-hukum tajwid dasar untuk membaca Al-Quran dengan benar</p>
+    </section>
+    <div style="display:grid;gap:12px">
+      ${tajwid.map(t => `
+      <div class="munasabah-card" style="border-left:4px solid ${t.warna}">
+        <div class="rel" style="color:${t.warna}">${t.hukum}</div>
+        <p style="font-size:14px;color:var(--ink-soft);margin:6px 0">${t.desc}</p>
+        <p style="font-size:13px;font-style:italic;color:var(--emerald)">Contoh: ${t.contoh}</p>
+      </div>
+      `).join('')}
+    </div>
+    <section class="section">
+      <h3>📖 Huruf Hijaiyah</h3>
+      <div class="surah-grid" style="grid-template-columns:repeat(auto-fill,minmax(80px,1fr))">
+        ${['ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي'].map(h=>`
+          <div class="sg-item on" style="justify-content:center;padding:12px">
+            <span style="font-family:var(--arabic);font-size:28px">${h}</span>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  </main>`;
+  window.scrollTo(0,0);
+}
 </script>
 </body>
 </html>
