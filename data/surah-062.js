@@ -1,0 +1,65 @@
+registerSurah({
+  nomor: 62,
+  nama: "Al-Jumu'ah",
+  arti: "Hari Jumat",
+  arab: "الْجُمُعَة",
+  golongan: "Madaniyah",
+  posisi: "Juz 28",
+  namaLain: "— (kelompok Al-Musabbihat)",
+  deskripsi: "Empat misi rasul bagi kaum ummi, perumpamaan menohok keledai pemikul kitab, kematian yang tak bisa dihindari — lalu paket lengkap adab Jumat: bergegas saat azan, tinggalkan jual beli, dan bertebaran mencari karunia seusai shalat.",
+  ayat: [
+    { ar:"يُسَبِّحُ لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ الْمَلِكِ الْقُدُّوسِ الْعَزِيزِ الْحَكِيمِ", latin:"Yusabbiḥu lillāhi mā fis-samāwāti wa mā fil-arḍil-malikil-quddūsil-'azīzil-ḥakīm", tr:"Apa yang ada di langit dan apa yang ada di bumi senantiasa bertasbih kepada Allah Yang Maharaja, Mahasuci, Mahaperkasa, lagi Mahabijaksana." },
+    { ar:"هُوَ الَّذِي بَعَثَ فِي الْأُمِّيِّينَ رَسُولًا مِّنْهُمْ يَتْلُو عَلَيْهِمْ آيَاتِهِ وَيُزَكِّيهِمْ وَيُعَلِّمُهُمُ الْكِتَابَ وَالْحِكْمَةَ وَإِن كَانُوا مِن قَبْلُ لَفِي ضَلَالٍ مُّبِينٍ", latin:"Huwal-lażī ba'aṡa fil-ummiyyīna rasūlam minhum yatlū 'alaihim āyātihī wa yuzakkīhim wa yu'allimuhumul-kitāba wal-ḥikmata wa in kānū min qablu lafī ḍalālim mubīn", tr:"Dialah yang mengutus seorang Rasul (Nabi Muhammad) kepada kaum yang buta huruf dari (kalangan) mereka sendiri, yang membacakan kepada mereka ayat-ayat-Nya, menyucikan (jiwa) mereka, serta mengajarkan kepada mereka Kitab (Al-Qur'an) dan Hikmah (Sunah), meskipun sebelumnya mereka benar-benar dalam kesesatan yang nyata." },
+    { ar:"وَآخَرِينَ مِنْهُمْ لَمَّا يَلْحَقُوا بِهِمْ ۚ وَهُوَ الْعَزِيزُ الْحَكِيمُ", latin:"Wa ākharīna minhum lammā yalḥaqū bihim, wa huwal-'azīzul-ḥakīm", tr:"(Allah juga mengutus Nabi Muhammad) kepada (kaum) selain mereka yang belum (datang) menyusul mereka. Dialah Yang Mahaperkasa lagi Mahabijaksana." },
+    { ar:"ذَٰلِكَ فَضْلُ اللَّهِ يُؤْتِيهِ مَن يَشَاءُ ۚ وَاللَّهُ ذُو الْفَضْلِ الْعَظِيمِ", latin:"Żālika faḍlullāhi yu'tīhi may yasyā', wallāhu żul-faḍlil-'aẓīm", tr:"Itulah karunia Allah yang dianugerahkan kepada siapa yang Dia kehendaki. Allah memiliki karunia yang besar." },
+    { ar:"مَثَلُ الَّذِينَ حُمِّلُوا التَّوْرَاةَ ثُمَّ لَمْ يَحْمِلُوهَا كَمَثَلِ الْحِمَارِ يَحْمِلُ أَسْفَارًا ۚ بِئْسَ مَثَلُ الْقَوْمِ الَّذِينَ كَذَّبُوا بِآيَاتِ اللَّهِ ۚ وَاللَّهُ لَا يَهْدِي الْقَوْمَ الظَّالِمِينَ", latin:"Maṡalul-lażīna ḥummilut-taurāta ṡumma lam yaḥmilūhā kamaṡalil-ḥimāri yaḥmilu asfārā, bi'sa maṡalul-qaumil-lażīna każżabū bi'āyātillāh, wallāhu lā yahdil-qaumaẓ-ẓālimīn", tr:"Perumpamaan orang-orang yang dibebani tugas mengamalkan Taurat, kemudian tidak mengamalkannya, adalah seperti keledai yang membawa kitab-kitab (tebal tanpa mengerti kandungannya). Sangat buruk perumpamaan kaum yang mendustakan ayat-ayat Allah. Allah tidak memberi petunjuk kepada kaum yang zalim." },
+    { ar:"قُلْ يَا أَيُّهَا الَّذِينَ هَادُوا إِن زَعَمْتُمْ أَنَّكُمْ أَوْلِيَاءُ لِلَّهِ مِن دُونِ النَّاسِ فَتَمَنَّوُا الْمَوْتَ إِن كُنتُمْ صَادِقِينَ", latin:"Qul yā ayyuhal-lażīna hādū in za'amtum annakum auliyā'u lillāhi min dūnin-nāsi fatamannawul-mauta in kuntum ṣādiqīn", tr:"Katakanlah (Nabi Muhammad), \"Wahai orang-orang Yahudi, jika kamu mengira bahwa kamulah kekasih Allah (dan) bukan orang lain, harapkanlah kematianmu, jika kamu orang-orang benar.\"" },
+    { ar:"وَلَا يَتَمَنَّوْنَهُ أَبَدًا بِمَا قَدَّمَتْ أَيْدِيهِمْ ۚ وَاللَّهُ عَلِيمٌ بِالظَّالِمِينَ", latin:"Wa lā yatamannaunahū abadam bimā qaddamat aidīhim, wallāhu 'alīmum biẓ-ẓālimīn", tr:"Mereka tidak akan mengharapkan kematian itu selamanya disebabkan apa (keburukan) yang telah mereka perbuat dengan tangan mereka sendiri. Allah Maha Mengetahui orang-orang zalim." },
+    { ar:"قُلْ إِنَّ الْمَوْتَ الَّذِي تَفِرُّونَ مِنْهُ فَإِنَّهُ مُلَاقِيكُمْ ۖ ثُمَّ تُرَدُّونَ إِلَىٰ عَالِمِ الْغَيْبِ وَالشَّهَادَةِ فَيُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ", latin:"Qul innal-mautal-lażī tafirrūna minhu fa'innahū mulāqīkum ṡumma turaddūna ilā 'ālimil-gaibi wasy-syahādati fayunabbi'ukum bimā kuntum ta'malūn", tr:"Katakanlah, \"Sesungguhnya kematian yang kamu lari darinya pasti akan menemuimu. Kamu kemudian akan dikembalikan kepada Yang Maha Mengetahui yang gaib dan yang nyata, lalu Dia beritakan kepadamu apa yang selama ini kamu kerjakan.\"" },
+    { ar:"يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِن يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ وَذَرُوا الْبَيْعَ ۚ ذَٰلِكُمْ خَيْرٌ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ", latin:"Yā ayyuhal-lażīna āmanū iżā nūdiya liṣ-ṣalāti miy yaumil-jumu'ati fas'au ilā żikrillāhi wa żarul-bai', żālikum khairul lakum in kuntum ta'lamūn", tr:"Wahai orang-orang yang beriman, apabila (seruan) untuk melaksanakan salat pada hari Jumat telah dikumandangkan, segeralah mengingat Allah dan tinggalkanlah jual beli. Yang demikian itu lebih baik bagimu jika kamu mengetahui." },
+    { ar:"فَإِذَا قُضِيَتِ الصَّلَاةُ فَانتَشِرُوا فِي الْأَرْضِ وَابْتَغُوا مِن فَضْلِ اللَّهِ وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ", latin:"Fa'iżā quḍiyatiṣ-ṣalātu fantasyirū fil-arḍi wabtagū min faḍlillāhi ważkurullāha kaṡīral la'allakum tufliḥūn", tr:"Apabila salat (Jumat) telah dilaksanakan, bertebaranlah kamu di bumi, carilah karunia Allah, dan ingatlah Allah sebanyak-banyaknya agar kamu beruntung." },
+    { ar:"وَإِذَا رَأَوْا تِجَارَةً أَوْ لَهْوًا انفَضُّوا إِلَيْهَا وَتَرَكُوكَ قَائِمًا ۚ قُلْ مَا عِندَ اللَّهِ خَيْرٌ مِّنَ اللَّهْوِ وَمِنَ التِّجَارَةِ ۚ وَاللَّهُ خَيْرُ الرَّازِقِينَ", latin:"Wa iżā ra'au tijāratan au lahwaninfaḍḍū ilaihā wa tarakūka qā'imā, qul mā 'indallāhi khairum minal-lahwi wa minat-tijārah, wallāhu khairur-rāziqīn", tr:"Apabila (sebagian) mereka melihat perdagangan atau permainan, mereka segera berpencar (menuju) padanya dan meninggalkan engkau (Nabi Muhammad) yang sedang berdiri (berkhotbah). Katakanlah, \"Apa yang ada di sisi Allah lebih baik daripada permainan dan perdagangan.\" Allah pemberi rezeki yang terbaik." }
+  ],
+  kandungan: {
+    tema: "Nikmat diutusnya rasul dengan empat misinya, peringatan agar tak menjadi 'pemikul kitab tanpa amal', dan syariat Jumat sebagai hari berkumpulnya umat — dengan keseimbangan khasnya: berhenti berdagang saat panggilan shalat, lalu bertebaran mencari rezeki setelahnya.",
+    konteks: "Nabi ﷺ biasa membaca Al-Jumu'ah dan Al-Munafiqun dalam shalat Jumat (HR. Muslim). Sebab turun ayat 11 diriwayatkan Jabir: saat Nabi berkhutbah Jumat, tibalah kafilah dagang (dari Syam, dipimpin Dihyah Al-Kalbi sebelum keislamannya) dengan tabuhan genderang; jamaah bubar menyambutnya hingga tersisa dua belas orang — maka turun ayat ini (HR. Bukhari dan Muslim). Ayat 3 punya kisah indah: para sahabat bertanya siapa 'akharina minhum lamma yalhaqu bihim'; Nabi meletakkan tangan pada Salman Al-Farisi: 'Seandainya iman berada di bintang Tsurayya, niscaya akan diraih oleh orang-orang dari kaum ini' (HR. Bukhari dan Muslim).",
+    garisBesar: [
+      "Ayat 1: Pembuka tasbih dengan empat nama: Al-Malik, Al-Quddus, Al-'Aziz, Al-Hakim.",
+      "Ayat 2–4: Empat misi rasul bagi kaum ummi: tilawah ayat, tazkiyah jiwa, ta'lim Kitab, ta'lim Hikmah (Sunnah) — jawaban atas doa Ibrahim (QS. Al-Baqarah: 129); risalahnya menjangkau 'kaum lain yang belum menyusul' (bangsa-bangsa dan generasi setelahnya — termasuk kabar gembira bagi non-Arab lewat isyarat Salman); semua itu fadhl Allah.",
+      "Ayat 5–8: Peringatan lewat cermin Ahli Kitab: dibebani Taurat namun tak mengamalkannya — bak keledai memikul kitab; klaim 'kekasih Allah' diuji dengan tantangan mengharap kematian yang tak akan pernah mereka penuhi; dan kematian yang ditakuti pasti menemui, lalu semua dikembalikan kepada 'Alimul-ghaibi wasy-syahadah.",
+      "Ayat 9–10: Syariat Jumat: saat azan berkumandang, fas'au ila dzikrillah (bersegeralah — bukan berlari, melainkan memprioritaskan) dan wa dzarul-bai' (tinggalkan jual beli); seusai shalat: fantasyiru — bertebaranlah mencari karunia-Nya sambil banyak berdzikir.",
+      "Ayat 11: Teguran peristiwa kafilah: meninggalkan khatib demi dagangan dan hiburan — ditutup timbangan abadi: ma 'indallahi khairum minal-lahwi wa minat-tijarah, dan Allah sebaik-baik pemberi rezeki."
+    ],
+    pentingnya: "Ayat 9 adalah dalil pokok wajibnya shalat Jumat dan haramnya jual beli saat azan (jumhur: azan kedua ketika khatib naik mimbar). Susunan ayat 9–10 juga memuat filosofi ekonomi Islam yang khas: perdagangan dihentikan bukan karena tercela, melainkan karena ada yang lebih utama pada waktunya — dan begitu selesai, mencari rezeki justru diperintahkan dengan redaksi yang sama tegasnya."
+  },
+  hikmah: [
+    { j:"Empat misi rasul adalah kurikulum abadi pendidikan (ayat 2).", i:"Tilawah (akses kepada teks), tazkiyah (pembersihan jiwa), ta'lim kitab dan hikmah (ilmu dan penerapannya). Pendidikan yang hanya mengajar tanpa menyucikan jiwa baru menjalankan separuh warisan kenabian." },
+    { j:"Ilmu yang tak diamalkan adalah beban, bukan kemuliaan (ayat 5).", i:"Keledai tak bertambah mulia oleh kitab di punggungnya. Hafalan, gelar, dan koleksi kajian hanya memberatkan hisab bila tak mengubah amal — perumpamaan yang menampar setiap pemilik ilmu di setiap zaman." },
+    { j:"Klaim kedekatan dengan Allah bisa diuji (ayat 6–7).", i:"Yang benar-benar yakin dicintai Allah tak takut berjumpa dengan-Nya. Keengganan pada kematian sering membongkar isi klaim keagamaan; kesiapan pulang adalah ujian kejujuran iman." },
+    { j:"Lari dari kematian adalah lari menuju kematian (ayat 8).", i:"Fa'innahu mulaqikum — ia pasti menemuimu. Energi untuk menghindarinya lebih baik dialihkan untuk menyiapkannya; orang cerdas kata Nabi adalah yang banyak mengingat mati dan bersiap untuknya." },
+    { j:"Islam agama kerja DAN ibadah — dengan jadwal yang jelas (ayat 9–10).", i:"Tinggalkan dagang saat azan Jumat; bertebaranlah mencari rezeki seusainya. Bukan pertentangan dunia-akhirat, melainkan prioritas waktu: setiap hal mulia pada jamnya." },
+    { j:"Ukur segala tawaran dengan 'ma 'indallah' (ayat 11).", i:"Kafilah dagang dan hiburan itu nyata dan menggiurkan — tapi timbangannya tetap: yang di sisi Allah lebih baik. Kalimat ini pantas digantung di setiap godaan yang datang saat kewajiban sedang berlangsung." }
+  ],
+  hukum: [
+    { h:"Shalat Jumat wajib bagi laki-laki muslim, balig, berakal, mukim, dan mampu.", d:"Ayat 9; dikuatkan hadis ancaman meninggalkan tiga Jumat tanpa uzur (HR. Abu Dawud, At-Tirmidzi — hasan sahih) dan hadis kewajiban Jumat (HR. Abu Dawud — dengan pengecualian budak, wanita, anak, orang sakit)." },
+    { h:"Haram jual beli setelah azan Jumat (azan saat khatib naik mimbar) bagi yang wajib Jumat.", d:"Ayat 9 (wa dzarul-bai'); jumhur menilai akadnya terlarang." },
+    { h:"Mencari rezeki setelah shalat disyariatkan; bekerja bagian dari ibadah bila diniatkan benar.", d:"Ayat 10; sebagian salaf sengaja berniaga sejenak setelah Jumat mengamalkan zahir ayat." },
+    { h:"Mendengarkan khutbah wajib; meninggalkan khatib atau berbicara saat khutbah tercela.", d:"Ayat 11; dikuatkan hadis 'jika engkau berkata pada temanmu diamlah saat imam berkhutbah, sungguh engkau telah berbuat sia-sia' (HR. Bukhari dan Muslim)." },
+    { h:"Sunnah membaca Al-Jumu'ah dan Al-Munafiqun (atau Al-A'la dan Al-Ghasyiyah) dalam shalat Jumat.", d:"HR. Muslim dari Ibnu 'Abbas dan Abu Hurairah; serta HR. Muslim dari An-Nu'man bin Basyir." }
+  ],
+  munasabah: [
+    { rel:"DENGAN ASH-SHAFF (SEBELUMNYA)", isi:"Ash-Shaff menutup dengan seruan menjadi anshar (penolong) Allah sebagaimana kaum Hawariyyun; Al-Jumu'ah membuka dengan wujud kongkret pertolongan itu: menegakkan misi rasul (tilawah-tazkiyah-ta'lim) dan berhimpun sepekan sekali dalam shalat Jumat — barisan jihad dan barisan shaf Jumat bersambung." },
+    { rel:"DENGAN AL-MUNAFIQUN (SESUDAHNYA)", isi:"Al-Jumu'ah ditutup teguran jamaah yang bubar mengejar kafilah — kelalaian yang masih bisa diobati; Al-Munafiqun menampilkan stadium akutnya: dunia yang sepenuhnya menguasai hati hingga agama tinggal topeng. Nabi menyandingkan keduanya dalam satu shalat Jumat — pengingat mingguan dua bahaya bertingkat itu." },
+    { rel:"DALAM PETA BESAR QURAN", isi:"Empat misi rasul (ayat 2) adalah pengabulan doa Ibrahim di QS. Al-Baqarah: 129 dan diulang di Ali 'Imran: 164; tantangan tamannul-maut kembar dengan QS. Al-Baqarah: 94–96; perumpamaan keledai pemikul kitab berpasangan dengan anjing yang menjulurkan lidah (QS. Al-A'raf: 175–176) — dua tamsil ilmu yang tak mengangkat pemiliknya; dan keseimbangan shalat-kerja ayat 9–10 segema dengan QS. An-Nur: 37: rijal yang perdagangannya tak melalaikan dari dzikrullah." }
+  ],
+  rujukan: [
+    "Tafsir Ibnu Katsir — Surah Al-Jumu'ah",
+    "Tafsir As-Sa'di (Taisir al-Karim ar-Rahman) — Surah Al-Jumu'ah",
+    "Tafsir Ringkas Kemenag RI — Surah Al-Jumu'ah (via quran.kemenag.go.id / tafsirweb.com)",
+    "Terjemahan: Kemenag RI edisi penyempurnaan 2019 (via quran.nu.or.id)",
+    "HR. Bukhari dan Muslim (kisah kafilah Jumat dari Jabir; isyarat Salman; adab khutbah)",
+    "HR. Muslim (bacaan shalat Jumat)",
+    "HR. Abu Dawud, At-Tirmidzi (ancaman tiga Jumat — hasan sahih)"
+  ],
+  status: "Status: Draf — belum ditinjau · Peninjau: ______"
+});

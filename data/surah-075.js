@@ -1,0 +1,93 @@
+registerSurah({
+  nomor: 75,
+  nama: "Al-Qiyamah",
+  arti: "Hari Kiamat",
+  arab: "الْقِيٰمَة",
+  golongan: "Makkiyah",
+  posisi: "Juz 29",
+  namaLain: "La Uqsimu",
+  deskripsi: "Sumpah dengan hari kiamat dan jiwa yang menyesali diri; detail kebangkitan hingga jari-jemari; adab menerima wahyu; nikmat tertinggi memandang Allah; dan detik-detik sakratulmaut.",
+  ayat: [
+    { ar:"لَا أُقْسِمُ بِيَوْمِ الْقِيَامَةِ", latin:"Lā uqsimu biyaumil-qiyāmah", tr:"Aku bersumpah demi hari Kiamat." },
+    { ar:"وَلَا أُقْسِمُ بِالنَّفْسِ اللَّوَّامَةِ", latin:"Wa lā uqsimu bin-nafsil-lawwāmah", tr:"Aku bersumpah demi jiwa yang sangat menyesali (dirinya sendiri)." },
+    { ar:"أَيَحْسَبُ الْإِنسَانُ أَلَّن نَّجْمَعَ عِظَامَهُ", latin:"Ayaḥsabul-insānu allan najma'a 'iẓāmah", tr:"Apakah manusia mengira bahwa Kami tidak akan mengumpulkan (kembali) tulang-belulangnya?" },
+    { ar:"بَلَىٰ قَادِرِينَ عَلَىٰ أَن نُّسَوِّيَ بَنَانَهُ", latin:"Balā qādirīna 'alā an nusawwiya banānah", tr:"Tentu, (bahkan) Kami mampu menyusun (kembali) jari-jemarinya dengan sempurna." },
+    { ar:"بَلْ يُرِيدُ الْإِنسَانُ لِيَفْجُرَ أَمَامَهُ", latin:"Bal yurīdul-insānu liyafjura amāmah", tr:"Akan tetapi, manusia hendak berbuat maksiat terus-menerus." },
+    { ar:"يَسْأَلُ أَيَّانَ يَوْمُ الْقِيَامَةِ", latin:"Yas'alu ayyāna yaumul-qiyāmah", tr:"Dia bertanya, \"Kapankah hari Kiamat itu?\"" },
+    { ar:"فَإِذَا بَرِقَ الْبَصَرُ", latin:"Fa'iżā bariqal-baṣar", tr:"Apabila mata terbelalak (ketakutan)," },
+    { ar:"وَخَسَفَ الْقَمَرُ", latin:"Wa khasafal-qamar", tr:"bulan pun telah hilang cahayanya," },
+    { ar:"وَجُمِعَ الشَّمْسُ وَالْقَمَرُ", latin:"Wa jumi'asy-syamsu wal-qamar", tr:"serta matahari dan bulan dikumpulkan," },
+    { ar:"يَقُولُ الْإِنسَانُ يَوْمَئِذٍ أَيْنَ الْمَفَرُّ", latin:"Yaqūlul-insānu yauma'iżin ainal-mafarr", tr:"pada hari itu manusia berkata, \"Ke mana tempat lari?\"" },
+    { ar:"كَلَّا لَا وَزَرَ", latin:"Kallā lā wazar", tr:"Sekali-kali tidak! Tidak ada tempat berlindung." },
+    { ar:"إِلَىٰ رَبِّكَ يَوْمَئِذٍ الْمُسْتَقَرُّ", latin:"Ilā rabbika yauma'iżinil-mustaqarr", tr:"(Hanya) kepada Tuhanmu tempat kembali pada hari itu." },
+    { ar:"يُنَبَّأُ الْإِنسَانُ يَوْمَئِذٍ بِمَا قَدَّمَ وَأَخَّرَ", latin:"Yunabba'ul-insānu yauma'iżim bimā qaddama wa akhkhar", tr:"Pada hari itu diberitakan kepada manusia apa yang telah dia kerjakan dan apa yang telah dia lalaikan." },
+    { ar:"بَلِ الْإِنسَانُ عَلَىٰ نَفْسِهِ بَصِيرَةٌ", latin:"Balil-insānu 'alā nafsihī baṣīrah", tr:"Bahkan, manusia menjadi saksi atas dirinya sendiri" },
+    { ar:"وَلَوْ أَلْقَىٰ مَعَاذِيرَهُ", latin:"Walau alqā ma'āżīrah", tr:"walaupun dia mengemukakan alasan-alasan(-nya)." },
+    { ar:"لَا تُحَرِّكْ بِهِ لِسَانَكَ لِتَعْجَلَ بِهِ", latin:"Lā tuḥarrik bihī lisānaka lita'jala bih", tr:"Jangan engkau (Nabi Muhammad) gerakkan lidahmu (untuk membaca Al-Qur'an) karena hendak tergesa-gesa (menguasai)-nya." },
+    { ar:"إِنَّ عَلَيْنَا جَمْعَهُ وَقُرْآنَهُ", latin:"Inna 'alainā jam'ahū wa qur'ānah", tr:"Sesungguhnya tugas Kamilah untuk mengumpulkan (dalam hatimu) dan membacakannya." },
+    { ar:"فَإِذَا قَرَأْنَاهُ فَاتَّبِعْ قُرْآنَهُ", latin:"Fa'iżā qara'nāhu fattabi' qur'ānah", tr:"Maka, apabila Kami telah selesai membacakannya, ikutilah bacaannya itu." },
+    { ar:"ثُمَّ إِنَّ عَلَيْنَا بَيَانَهُ", latin:"Ṡumma inna 'alainā bayānah", tr:"Kemudian, sesungguhnya tugas Kami (pula)-lah (untuk) menjelaskannya." },
+    { ar:"كَلَّا بَلْ تُحِبُّونَ الْعَاجِلَةَ", latin:"Kallā bal tuḥibbūnal-'ājilah", tr:"Sekali-kali tidak! Bahkan, kamu mencintai kehidupan dunia," },
+    { ar:"وَتَذَرُونَ الْآخِرَةَ", latin:"Wa tażarūnal-ākhirah", tr:"dan mengabaikan (kehidupan) akhirat." },
+    { ar:"وُجُوهٌ يَوْمَئِذٍ نَّاضِرَةٌ", latin:"Wujūhuy yauma'iżin nāḍirah", tr:"Wajah-wajah (orang mukmin) pada hari itu berseri-seri" },
+    { ar:"إِلَىٰ رَبِّهَا نَاظِرَةٌ", latin:"Ilā rabbihā nāẓirah", tr:"(karena) memandang Tuhannya." },
+    { ar:"وَوُجُوهٌ يَوْمَئِذٍ بَاسِرَةٌ", latin:"Wa wujūhuy yauma'iżim bāsirah", tr:"Wajah-wajah (orang kafir) pada hari itu muram" },
+    { ar:"تَظُنُّ أَن يُفْعَلَ بِهَا فَاقِرَةٌ", latin:"Taẓunnu ay yuf'ala bihā fāqirah", tr:"(karena) mereka yakin akan ditimpakan kepadanya malapetaka yang sangat dahsyat." },
+    { ar:"كَلَّا إِذَا بَلَغَتِ التَّرَاقِيَ", latin:"Kallā iżā balagatit-tarāqī", tr:"Sekali-kali tidak! Apabila (nyawa) telah sampai di kerongkongan," },
+    { ar:"وَقِيلَ مَنْ رَاقٍ", latin:"Wa qīla man rāq", tr:"dan dikatakan (kepadanya), \"Siapa yang (dapat) menyembuhkan?\"" },
+    { ar:"وَظَنَّ أَنَّهُ الْفِرَاقُ", latin:"Wa ẓanna annahul-firāq", tr:"Dia pun yakin bahwa itulah waktu perpisahan (dengan dunia)," },
+    { ar:"وَالْتَفَّتِ السَّاقُ بِالسَّاقِ", latin:"Waltaffatis-sāqu bis-sāq", tr:"dan bertautlah betis (kiri) dengan betis (kanan)." },
+    { ar:"إِلَىٰ رَبِّكَ يَوْمَئِذٍ الْمَسَاقُ", latin:"Ilā rabbika yauma'iżinil-masāq", tr:"Kepada Tuhanmulah pada hari itu (manusia) digiring." },
+    { ar:"فَلَا صَدَّقَ وَلَا صَلَّىٰ", latin:"Falā ṣaddaqa wa lā ṣallā", tr:"Dia tidak membenarkan (Al-Qur'an dan Rasul) dan tidak melaksanakan salat." },
+    { ar:"وَلَٰكِن كَذَّبَ وَتَوَلَّىٰ", latin:"Wa lākin każżaba wa tawallā", tr:"Akan tetapi, dia mendustakan (Al-Qur'an) dan berpaling (dari kebenaran)." },
+    { ar:"ثُمَّ ذَهَبَ إِلَىٰ أَهْلِهِ يَتَمَطَّىٰ", latin:"Ṡumma żahaba ilā ahlihī yatamaṭṭā", tr:"Kemudian, dia pergi kepada keluarganya dengan menyombongkan diri." },
+    { ar:"أَوْلَىٰ لَكَ فَأَوْلَىٰ", latin:"Aulā laka fa'aulā", tr:"Celakalah kamu! Maka, celakalah!" },
+    { ar:"ثُمَّ أَوْلَىٰ لَكَ فَأَوْلَىٰ", latin:"Ṡumma aulā laka fa'aulā", tr:"Kemudian, celakalah kamu! Maka, celakalah!" },
+    { ar:"أَيَحْسَبُ الْإِنسَانُ أَن يُتْرَكَ سُدًى", latin:"Ayaḥsabul-insānu ay yutraka sudā", tr:"Apakah manusia mengira akan dibiarkan begitu saja (tanpa pertanggungjawaban)?" },
+    { ar:"أَلَمْ يَكُ نُطْفَةً مِّن مَّنِيٍّ يُمْنَىٰ", latin:"Alam yaku nuṭfatam mim maniyyiy yumnā", tr:"Bukankah dia dahulu setetes mani yang ditumpahkan (ke dalam rahim)?" },
+    { ar:"ثُمَّ كَانَ عَلَقَةً فَخَلَقَ فَسَوَّىٰ", latin:"Ṡumma kāna 'alaqatan fakhalaqa fasawwā", tr:"Kemudian, (mani itu) menjadi sesuatu yang melekat, lalu Dia menciptakan dan menyempurnakannya." },
+    { ar:"فَجَعَلَ مِنْهُ الزَّوْجَيْنِ الذَّكَرَ وَالْأُنثَىٰ", latin:"Faja'ala minhuz-zaujainiż-żakara wal-unṡā", tr:"Lalu, Dia menjadikan darinya sepasang laki-laki dan perempuan." },
+    { ar:"أَلَيْسَ ذَٰلِكَ بِقَادِرٍ عَلَىٰ أَن يُحْيِيَ الْمَوْتَىٰ", latin:"Alaisa żālika biqādirin 'alā ay yuḥyiyal-mautā", tr:"Bukankah (Allah) itu kuasa (pula) menghidupkan orang mati?" }
+  ],
+  kandungan: {
+    tema: "Kepastian kebangkitan hingga detail terkecil, kesaksian manusia atas dirinya sendiri, adab Nabi menerima wahyu, dua wajah di hari kiamat dengan nikmat tertingginya, dan drama sakratulmaut.",
+    konteks: "Ayat 16–19 punya sebab turun sahih: Nabi ﷺ menggerakkan bibirnya tergesa mengikuti Jibril karena khawatir lupa, maka Allah menjamin pengumpulannya di dada beliau (HR. Bukhari dan Muslim dari Ibnu 'Abbas). Ayat 4 tentang banan (ujung jari) menjadi renungan modern yang menakjubkan: sidik jari — identitas unik tiap manusia — disebut sebagai puncak kesempurnaan penyusunan kembali. Ayat 23 adalah dalil pokok ahlussunnah tentang ru'yatullah: orang beriman memandang Rabbnya di akhirat, dikuatkan hadis \"Sesungguhnya kalian akan melihat Rabb kalian sebagaimana melihat bulan purnama\" (HR. Bukhari dan Muslim).",
+    garisBesar: [
+      "Ayat 1–6: Sumpah hari kiamat dan nafs lawwamah; keraguan manusia dijawab: bahkan jari-jemarinya disusun ulang sempurna — akar penolakan sebenarnya: ingin terus bermaksiat.",
+      "Ayat 7–15: Adegan kiamat (mata terbelalak, bulan-matahari dikumpulkan), tak ada tempat lari; manusia diberitakan amal yang dikerjakan dan dilalaikan — dan ia sendiri basirah: saksi atas dirinya, walau pandai beralasan.",
+      "Ayat 16–19: Sisipan adab wahyu: jangan tergesa; Allah menjamin pengumpulan, pembacaan, dan penjelasannya.",
+      "Ayat 20–25: Diagnosis: mencintai al-'ajilah (yang segera) dan meninggalkan akhirat; lalu dua wajah: nadhirah yang memandang Rabbnya, dan basirah yang muram menanti petaka.",
+      "Ayat 26–35: Sakratulmaut: nyawa di kerongkongan, pencarian penyembuh yang sia-sia, keyakinan berpisah, betis bertaut — digiring kepada Rabbnya; disusul potret si pendusta yang dulu tak shalat dan pulang menyombong: celakalah, celakalah.",
+      "Ayat 36–40: Gugatan penutup: dikira dibiarkan suda (sia-sia tanpa tanggung jawab)? Perjalanan nuthfah → 'alaqah → disempurnakan → berpasangan; bukankah Zat itu kuasa menghidupkan yang mati?"
+    ],
+    pentingnya: "Ayat 14–15 merumuskan kejujuran eksistensial: manusia adalah saksi terbaik atas dirinya sendiri, sepandai apa pun ia menyusun alasan. Dan ayat 22–23 menetapkan puncak seluruh kenikmatan surga — bukan istananya, melainkan memandang wajah Allah."
+  },
+  hikmah: [
+    { j:"Jiwa yang menyesali diri adalah jiwa yang hidup (ayat 2).", i:"Nafs lawwamah disandingkan dalam sumpah dengan hari kiamat — kehormatan besar. Rasa menyesal setelah dosa bukan kelemahan; itu tanda hati masih bernyawa dan pintu menuju muthma'innah." },
+    { j:"Alasan penolakan kebenaran sering bukan intelektual, tapi selera (ayat 5).", i:"'Manusia ingin terus bermaksiat di hadapannya' — keberatan pada hari kebangkitan sering kamuflase dari keengganan meninggalkan dosa. Jujurlah pada motif sendiri." },
+    { j:"Kamu tak bisa menipu dirimu sendiri (ayat 14–15).", i:"Alasan bisa meyakinkan orang lain, bahkan pembimbing dan hakim — tapi basirah di dalam tahu persis. Taubat dimulai dari berhenti berdalih kepada diri sendiri." },
+    { j:"Ilmu diterima dengan tenang, tidak tergesa (ayat 16–19).", i:"Nabi saja diajari menahan diri dan menyimak sampai selesai. Adab belajar: dengarkan utuh, jangan memotong, dan percayakan pemahaman kepada Allah sambil terus berusaha." },
+    { j:"Nikmat tertinggi bukan fasilitas, tapi perjumpaan (ayat 22–23).", i:"Wajah berseri karena memandang Rabbnya. Orientasi ibadah tertinggi adalah wajah Allah — dan kerinduan ini yang membuat ahli surga merasa semua nikmat lain kecil." },
+    { j:"Sakratulmaut membatalkan semua kepura-puraan (ayat 26–30).", i:"'Siapa yang dapat menyembuhkan?' — pertanyaan putus asa saat nyawa di kerongkongan. Mengingat adegan ini secara rutin adalah nasihat paling ampuh, sebagaimana wasiat memperbanyak mengingat pemutus kelezatan (HR. At-Tirmidzi — verifikasi derajat)." }
+  ],
+  hukum: [
+    { h:"Wajib mengimani kebangkitan jasad secara detail.", d:"Ayat 3–4; penyusunan ulang hingga ujung jari menolak pemahaman kebangkitan sekadar simbolik." },
+    { h:"Orang beriman akan melihat Allah di akhirat (ru'yatullah).", d:"Ayat 22–23; dikuatkan hadis mutawatir makna tentang melihat Rabb seperti bulan purnama (HR. Bukhari dan Muslim) — akidah ahlussunnah." },
+    { h:"Adab menuntut ilmu dan menerima Al-Quran: menyimak dengan tenang.", d:"Ayat 16–19; sejalan dengan QS. Al-A'raf: 204 dan QS. Taha: 114." },
+    { h:"Meninggalkan shalat dan pendustaan adalah jalan kecelakaan.", d:"Ayat 31–35; ancaman 'aula laka fa aula' bagi yang tidak membenarkan dan tidak shalat." }
+  ],
+  munasabah: [
+    { rel:"DENGAN AL-MUDDATSTSIR (SEBELUMNYA)", isi:"Al-Muddatstsir menutup dengan manusia yang justru lari dari peringatan; Al-Qiyamah membuka dengan sumpah atas hari yang membuat tak ada tempat lari (ainal-mafarr... la wazar) — yang lari dari peringatan hari ini akan mencari pelarian yang tak ada di hari itu." },
+    { rel:"DENGAN AL-INSAN (SESUDAHNYA)", isi:"Al-Qiyamah mencela pecinta al-'ajilah dan menutup dengan asal nuthfah; Al-Insan membuka dengan nuthfah yang sama lalu memutar sisi terangnya: profil abrar yang menahan diri, memberi makan karena wajah Allah, dan memperoleh wajah berseri (nadhrah) — kata yang sama dengan wajah nadhirah di Al-Qiyamah: 22." },
+    { rel:"DALAM PETA BESAR QURAN", isi:"Nafs lawwamah (ayat 2) adalah anak tangga tengah antara ammarah (QS. Yusuf: 53) dan muthma'innah (QS. Al-Fajr: 27); sakratulmaut ayat 26–30 sejajar dengan QS. Al-Waqi'ah: 83–87 dan QS. Qaf: 19 — tiga adegan kerongkongan yang saling menguatkan." }
+  ],
+  rujukan: [
+    "Tafsir Ibnu Katsir — Surah Al-Qiyamah",
+    "Tafsir As-Sa'di (Taisir al-Karim ar-Rahman) — Surah Al-Qiyamah",
+    "Tafsir Ringkas Kemenag RI — Surah Al-Qiyamah (via quran.kemenag.go.id / tafsirweb.com)",
+    "Terjemahan: Kemenag RI edisi penyempurnaan 2019 (via quran.nu.or.id)",
+    "HR. Bukhari dan Muslim (sebab turun ayat 16–19 dari Ibnu 'Abbas; hadis ru'yatullah)",
+    "HR. At-Tirmidzi (memperbanyak mengingat kematian — verifikasi derajat riwayat)"
+  ],
+  status: "Status: Draf — belum ditinjau · Peninjau: ______"
+});

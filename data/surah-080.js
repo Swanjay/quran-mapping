@@ -1,0 +1,92 @@
+registerSurah({
+  nomor: 80,
+  nama: "'Abasa",
+  arti: "Bermuka Masam",
+  arab: "عَبَسَ",
+  golongan: "Makkiyah",
+  posisi: "Juz 30",
+  namaLain: "As-Safarah, Al-A'ma",
+  deskripsi: "Teguran Allah kepada Nabi-Nya sendiri dalam peristiwa Ibnu Ummi Maktum — pelajaran abadi tentang prioritas dakwah dan kemuliaan pencari kebenaran, lalu perjalanan manusia dari setetes mani hingga dua wajah di hari kiamat.",
+  ayat: [
+    { ar:"عَبَسَ وَتَوَلَّىٰ", latin:"'Abasa wa tawallā", tr:"Dia (Nabi Muhammad) berwajah masam dan berpaling" },
+    { ar:"أَن جَاءَهُ الْأَعْمَىٰ", latin:"An jā'ahul-a'mā", tr:"karena seorang tunanetra (Abdullah bin Ummi Maktum) telah datang kepadanya." },
+    { ar:"وَمَا يُدْرِيكَ لَعَلَّهُ يَزَّكَّىٰ", latin:"Wa mā yudrīka la'allahū yazzakkā", tr:"Tahukah engkau (Nabi Muhammad) boleh jadi dia ingin menyucikan dirinya (dari dosa)" },
+    { ar:"أَوْ يَذَّكَّرُ فَتَنفَعَهُ الذِّكْرَىٰ", latin:"Au yażżakkaru fatanfa'ahuż-żikrā", tr:"atau dia (ingin) mendapatkan pengajaran sehingga pengajaran itu bermanfaat baginya?" },
+    { ar:"أَمَّا مَنِ اسْتَغْنَىٰ", latin:"Ammā manistagnā", tr:"Adapun orang yang merasa dirinya serba cukup (para pembesar Quraisy)," },
+    { ar:"فَأَنتَ لَهُ تَصَدَّىٰ", latin:"Fa'anta lahū taṣaddā", tr:"engkau (Nabi Muhammad) memberi perhatian kepadanya." },
+    { ar:"وَمَا عَلَيْكَ أَلَّا يَزَّكَّىٰ", latin:"Wa mā 'alaika allā yazzakkā", tr:"Padahal, tidak ada (cela) atasmu kalau dia tidak menyucikan diri (beriman)." },
+    { ar:"وَأَمَّا مَن جَاءَكَ يَسْعَىٰ", latin:"Wa ammā man jā'aka yas'ā", tr:"Adapun orang yang datang kepadamu dengan bersegera (untuk mendapatkan pengajaran)," },
+    { ar:"وَهُوَ يَخْشَىٰ", latin:"Wa huwa yakhsyā", tr:"sedangkan dia takut (kepada Allah)," },
+    { ar:"فَأَنتَ عَنْهُ تَلَهَّىٰ", latin:"Fa'anta 'anhu talahhā", tr:"malah engkau (Nabi Muhammad) abaikan." },
+    { ar:"كَلَّا إِنَّهَا تَذْكِرَةٌ", latin:"Kallā innahā tażkirah", tr:"Sekali-kali jangan (begitu)! Sesungguhnya (ajaran Allah) itu merupakan peringatan." },
+    { ar:"فَمَن شَاءَ ذَكَرَهُ", latin:"Faman syā'a żakarah", tr:"Siapa yang menghendaki tentulah akan memperhatikannya" },
+    { ar:"فِي صُحُفٍ مُّكَرَّمَةٍ", latin:"Fī ṣuḥufim mukarramah", tr:"di dalam suhuf yang dimuliakan (di sisi Allah)," },
+    { ar:"مَّرْفُوعَةٍ مُّطَهَّرَةٍ", latin:"Marfū'atim muṭahharah", tr:"yang ditinggikan (kedudukannya) lagi disucikan" },
+    { ar:"بِأَيْدِي سَفَرَةٍ", latin:"Bi'aidī safarah", tr:"di tangan para utusan (malaikat)" },
+    { ar:"كِرَامٍ بَرَرَةٍ", latin:"Kirāmim bararah", tr:"yang mulia lagi berbudi." },
+    { ar:"قُتِلَ الْإِنسَانُ مَا أَكْفَرَهُ", latin:"Qutilal-insānu mā akfarah", tr:"Celakalah manusia! Alangkah kufur dia!" },
+    { ar:"مِنْ أَيِّ شَيْءٍ خَلَقَهُ", latin:"Min ayyi syai'in khalaqah", tr:"Dari apakah Dia menciptakannya?" },
+    { ar:"مِن نُّطْفَةٍ خَلَقَهُ فَقَدَّرَهُ", latin:"Min nuṭfah, khalaqahū faqaddarah", tr:"Dia menciptakannya dari setetes mani, lalu menentukan (takdir)-nya." },
+    { ar:"ثُمَّ السَّبِيلَ يَسَّرَهُ", latin:"Ṡummas-sabīla yassarah", tr:"Kemudian, jalannya Dia mudahkan." },
+    { ar:"ثُمَّ أَمَاتَهُ فَأَقْبَرَهُ", latin:"Ṡumma amātahū fa'aqbarah", tr:"Kemudian, Dia mematikannya lalu menguburkannya." },
+    { ar:"ثُمَّ إِذَا شَاءَ أَنشَرَهُ", latin:"Ṡumma iżā syā'a ansyarah", tr:"Kemudian, jika menghendaki, Dia membangkitkannya kembali." },
+    { ar:"كَلَّا لَمَّا يَقْضِ مَا أَمَرَهُ", latin:"Kallā lammā yaqḍi mā amarah", tr:"Sekali-kali jangan (begitu)! Dia (manusia) itu belum melaksanakan apa yang Dia (Allah) perintahkan kepadanya." },
+    { ar:"فَلْيَنظُرِ الْإِنسَانُ إِلَىٰ طَعَامِهِ", latin:"Falyanẓuril-insānu ilā ṭa'āmih", tr:"Maka, hendaklah manusia itu memperhatikan makanannya." },
+    { ar:"أَنَّا صَبَبْنَا الْمَاءَ صَبًّا", latin:"Annā ṣababnal-mā'a ṣabbā", tr:"Sesungguhnya Kami telah mencurahkan air (dari langit) dengan berlimpah." },
+    { ar:"ثُمَّ شَقَقْنَا الْأَرْضَ شَقًّا", latin:"Ṡumma syaqaqnal-arḍa syaqqā", tr:"Kemudian, Kami belah bumi dengan sebaik-baiknya." },
+    { ar:"فَأَنبَتْنَا فِيهَا حَبًّا", latin:"Fa'ambatnā fīhā ḥabbā", tr:"Lalu, Kami tumbuhkan padanya biji-bijian," },
+    { ar:"وَعِنَبًا وَقَضْبًا", latin:"Wa 'inabaw wa qaḍbā", tr:"anggur, sayur-sayuran," },
+    { ar:"وَزَيْتُونًا وَنَخْلًا", latin:"Wa zaitūnaw wa nakhlā", tr:"zaitun, pohon kurma," },
+    { ar:"وَحَدَائِقَ غُلْبًا", latin:"Wa ḥadā'iqa gulbā", tr:"kebun-kebun (yang) rindang," },
+    { ar:"وَفَاكِهَةً وَأَبًّا", latin:"Wa fākihataw wa abbā", tr:"buah-buahan, dan rerumputan." },
+    { ar:"مَّتَاعًا لَّكُمْ وَلِأَنْعَامِكُمْ", latin:"Matā'al lakum wa li'an'āmikum", tr:"(Semua itu disediakan) untuk kesenanganmu dan hewan-hewan ternakmu." },
+    { ar:"فَإِذَا جَاءَتِ الصَّاخَّةُ", latin:"Fa'iżā jā'atiṣ-ṣākhkhah", tr:"Maka, apabila datang suara yang memekakkan (dari tiupan sangkakala)," },
+    { ar:"يَوْمَ يَفِرُّ الْمَرْءُ مِنْ أَخِيهِ", latin:"Yauma yafirrul-mar'u min akhīh", tr:"pada hari itu manusia lari dari saudaranya," },
+    { ar:"وَأُمِّهِ وَأَبِيهِ", latin:"Wa ummihī wa abīh", tr:"(dari) ibu dan bapaknya," },
+    { ar:"وَصَاحِبَتِهِ وَبَنِيهِ", latin:"Wa ṣāḥibatihī wa banīh", tr:"serta (dari) istri dan anak-anaknya." },
+    { ar:"لِكُلِّ امْرِئٍ مِّنْهُمْ يَوْمَئِذٍ شَأْنٌ يُغْنِيهِ", latin:"Likullimri'im minhum yauma'iżin sya'nuy yugnīh", tr:"Setiap orang dari mereka pada hari itu mempunyai urusan yang menyibukkannya." },
+    { ar:"وُجُوهٌ يَوْمَئِذٍ مُّسْفِرَةٌ", latin:"Wujūhuy yauma'iżim musfirah", tr:"Pada hari itu ada wajah-wajah yang berseri-seri," },
+    { ar:"ضَاحِكَةٌ مُّسْتَبْشِرَةٌ", latin:"Ḍāḥikatum mustabsyirah", tr:"tertawa lagi gembira ria." },
+    { ar:"وَوُجُوهٌ يَوْمَئِذٍ عَلَيْهَا غَبَرَةٌ", latin:"Wa wujūhuy yauma'iżin 'alaihā gabarah", tr:"Pada hari itu ada (pula) wajah-wajah yang tertutup debu (suram)" },
+    { ar:"تَرْهَقُهَا قَتَرَةٌ", latin:"Tarhaquhā qatarah", tr:"dan tertutup oleh kegelapan (ditimpa kehinaan dan kesusahan)." },
+    { ar:"أُولَٰئِكَ هُمُ الْكَفَرَةُ الْفَجَرَةُ", latin:"Ulā'ika humul-kafaratul-fajarah", tr:"Mereka itulah orang-orang kafir lagi para pendurhaka." }
+  ],
+  kandungan: {
+    tema: "Koreksi ilahi atas skala prioritas dakwah — pencari kebenaran yang sederhana lebih utama daripada pembesar yang berpaling — dirangkai dengan renungan penciptaan, makanan, dan hari ketika setiap orang sibuk dengan nasibnya sendiri.",
+    konteks: "'Abdullah bin Ummi Maktum, sahabat tunanetra, datang meminta pengajaran ketika Nabi ﷺ sedang serius mendakwahi para pembesar Quraisy; beliau bermuka masam dan berpaling — maka turunlah teguran ini (diriwayatkan At-Tirmidzi dan disebutkan para mufasir dari 'Aisyah dan Ibnu 'Abbas). Setelah itu Nabi ﷺ memuliakannya, menyambutnya dengan 'selamat datang orang yang karenanya Rabbku menegurku', bahkan beberapa kali mengangkatnya sebagai pengganti beliau di Madinah. Perhatikan kelembutan tegurannya: dua ayat pertama memakai kata ganti orang ketiga ('dia bermuka masam') sebelum beralih menyapa langsung — gaya yang menjaga kehormatan Nabi ﷺ.",
+    garisBesar: [
+      "Ayat 1–10: Teguran: bermuka masam kepada tunanetra pencari ilmu, sementara perhatian tercurah kepada pembesar yang merasa cukup — padahal yang datang bersegera dan takut kepada Allah itulah yang berhak.",
+      "Ayat 11–16: Kedudukan wahyu: peringatan bagi yang mau, tercatat di suhuf yang dimuliakan, ditinggikan, disucikan, di tangan para safarah — malaikat mulia lagi berbudi.",
+      "Ayat 17–23: Renungan asal: dari nuthfah, ditakdirkan, dimudahkan jalannya, dimatikan, dikubur, dan dibangkitkan bila Dia kehendaki — namun manusia belum juga menunaikan perintah-Nya.",
+      "Ayat 24–32: Tadabbur makanan: air tercurah, bumi terbelah, lalu biji, anggur, sayur, zaitun, kurma, kebun rindang, buah, dan rumput — untuk manusia dan ternaknya.",
+      "Ayat 33–42: Ash-shakhkhah: hari manusia lari dari saudara, ibu-bapak, istri dan anak — masing-masing sibuk dengan urusannya; lalu dua wajah: berseri tertawa gembira, atau berdebu diliputi kegelapan — itulah kafarah fajarah."
+    ],
+    pentingnya: "Surah ini bukti otentisitas wahyu sekaligus standar emas etika dakwah: seandainya Al-Quran karangan Muhammad ﷺ, mustahil ia mengabadikan teguran atas dirinya sendiri untuk dibaca sepanjang zaman. Dan ukuran manusia dalam Islam ditetapkan di sini: bukan status sosial, melainkan kesungguhan mencari kebenaran dan rasa takut kepada Allah."
+  },
+  hikmah: [
+    { j:"Nilai manusia diukur dari pencariannya akan kebenaran, bukan statusnya (ayat 1–10).", i:"Tunanetra miskin yang haus ilmu didahulukan Allah atas para pembesar. Dalam majelis, komunitas, bahkan balasan pesan — prioritas kita kepada orang semestinya mengikuti standar ini, bukan kalkulasi manfaat duniawi." },
+    { j:"Teguran adalah tanda cinta, dan menerimanya adalah kemuliaan (ayat 1–2).", i:"Nabi ﷺ tidak menyembunyikan teguran ini; beliau justru memuliakan Ibnu Ummi Maktum seumur hidup. Pemimpin sejati bukan yang tak pernah keliru, tapi yang menerima koreksi dan memperbaiki diri secara terbuka." },
+    { j:"Jangan ukur keberhasilan dakwah dengan masuknya 'orang besar' (ayat 5–7).", i:"'Tidak ada cela atasmu kalau dia tak beriman' — hidayah bukan tanggunganmu. Fokus pada yang Allah datangkan, bukan pada target prestisius yang berpaling." },
+    { j:"Sepiring makanan adalah paket tanda kebesaran Allah (ayat 24–32).", i:"Falyanzhuril-insanu ila tha'amih — perintah tadabbur paling mudah: lihat piringmu; ada hujan, bumi yang dibelah, dan rantai penumbuhan di baliknya. Renungan ini melahirkan syukur sebelum suapan pertama." },
+    { j:"Di hari itu semua hubungan melepaskan diri (ayat 34–37).", i:"Lari dari saudara, ibu, bapak, istri, anak — bukan karena benci, tapi karena setiap orang punya sya'nun yughnih: urusan yang menyita dirinya sendiri. Bekal pribadi tidak bisa dititipkan kepada siapa pun." }
+  ],
+  hukum: [
+    { h:"Wajib memuliakan penuntut ilmu dan tidak membeda-bedakan manusia berdasarkan status.", d:"Ayat 1–10; sejalan dengan perintah bersabar bersama orang-orang yang menyeru Rabbnya (QS. Al-Kahf: 28)." },
+    { h:"Disyariatkan tadabbur atas makanan dan nikmat sebagai jalan syukur.", d:"Ayat 24–32; sejalan dengan QS. Al-Ghasyiyah: 17–20 dan adab menyebut nama Allah sebelum makan (HR. Bukhari dan Muslim)." },
+    { h:"Setiap orang memikul tanggung jawab amalnya sendiri di akhirat.", d:"Ayat 34–37; dikuatkan QS. Fatir: 18 ('tidaklah pemikul dosa memikul dosa orang lain') dan QS. Luqman: 33." }
+  ],
+  munasabah: [
+    { rel:"DENGAN AN-NAZI'AT (SEBELUMNYA)", isi:"An-Nazi'at menutup dengan 'engkau hanyalah pemberi peringatan bagi yang takut (yakhsyaha)'; 'Abasa membuka dengan orang yang datang 'wa huwa yakhsya' — dengan rasa takut itu — namun terabaikan. Definisi sasaran dakwah dan koreksi penerapannya bersambung kata per kata." },
+    { rel:"DENGAN AT-TAKWIR (SESUDAHNYA)", isi:"'Abasa menegaskan kemuliaan wahyu di tangan safarah kiramin bararah (malaikat mulia); At-Takwir melanjutkan pembelaan jalur wahyu itu: dibawa rasul karim (Jibril) yang kuat dan amanah kepada Nabi yang bukan gila — satu tema penjagaan wahyu dua surah beruntun." },
+    { rel:"DALAM PETA BESAR QURAN", isi:"Peristiwa Ibnu Ummi Maktum segaris dengan QS. Al-An'am: 52 dan Al-Kahf: 28 (larangan mengusir/mengabaikan orang beriman sederhana demi pembesar) — tiga tempat Quran mengoreksi godaan 'dakwah elitis'; dan dua wajah penutupnya (musfirah vs ghabarah) adalah mata rantai motif wajah kiamat bersama Al-Ghasyiyah: 2–8 dan Ali 'Imran: 106." }
+  ],
+  rujukan: [
+    "Tafsir Ibnu Katsir — Surah 'Abasa",
+    "Tafsir As-Sa'di (Taisir al-Karim ar-Rahman) — Surah 'Abasa",
+    "Tafsir Ringkas Kemenag RI — Surah 'Abasa (via quran.kemenag.go.id / tafsirweb.com)",
+    "Terjemahan: Kemenag RI edisi penyempurnaan 2019 (via quran.nu.or.id)",
+    "Riwayat At-Tirmidzi dari 'Aisyah (sebab turun — verifikasi derajat; kisahnya masyhur di kitab-kitab tafsir)",
+    "HR. Bukhari dan Muslim (adab makan — konteks ayat 24)"
+  ],
+  status: "Status: Draf — belum ditinjau · Peninjau: ______"
+});
