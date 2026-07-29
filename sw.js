@@ -1,4 +1,4 @@
-const CACHE_NAME = 'quran-mapping-v1';
+const CACHE_NAME = 'quran-mapping-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
