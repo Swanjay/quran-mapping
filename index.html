@@ -48,6 +48,13 @@ header{border-bottom:1px solid var(--line);background:var(--paper);position:stic
 .sg-item.on:hover{background:var(--emerald-pale)}
 .sg-item.off{opacity:.55}
 .sg-item.off .soon{font-size:10px;color:var(--ink-mute);display:block}
+.search-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.search-bar input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:14px;background:var(--card);color:var(--ink)}
+.search-bar input:focus{outline:none;border-color:var(--emerald)}
+.filter-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.filter-btn{padding:6px 14px;border:1px solid var(--line);border-radius:20px;font-size:12px;cursor:pointer;background:var(--card);color:var(--ink-soft);font-family:var(--sans);transition:all .2s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--emerald);color:var(--emerald);background:var(--emerald-pale)}
+.sg-item.hidden{display:none}
 .surah-head{padding:32px 0 8px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
 .eyebrow{font-size:11px;letter-spacing:.12em;color:var(--gold);font-weight:600}
 .surah-head h2{font-family:var(--serif);font-size:27px;font-weight:600;margin-top:4px}
@@ -137,6 +144,73 @@ const audioUrl = (su, ay) => `https://everyayah.com/data/${QARI}/${pad(su)}${pad
 const view = document.getElementById('view');
 const audio = new Audio();
 let nowPlaying = 0, sequential = false, currentSurah = 0, arSize = 34;
+let activeFilter = 'all';
+
+// Surah metadata for filtering
+const SURAHS_META = {
+  1:{type:'makkiyah',juz:1},2:{type:'madaniyah',juz:1},3:{type:'madaniyah',juz:3},4:{type:'madaniyah',juz:4},
+  5:{type:'madaniyah',juz:6},6:{type:'makkiyah',juz:7},7:{type:'makkiyah',juz:8},8:{type:'madaniyah',juz:9},
+  9:{type:'madaniyah',juz:10},10:{type:'makkiyah',juz:11},11:{type:'makkiyah',juz:11},12:{type:'makkiyah',juz:12},
+  13:{type:'madaniyah',juz:13},14:{type:'makkiyah',juz:13},15:{type:'makkiyah',juz:14},16:{type:'makkiyah',juz:14},
+  17:{type:'makkiyah',juz:15},18:{type:'makkiyah',juz:15},19:{type:'makkiyah',juz:16},20:{type:'makkiyah',juz:16},
+  21:{type:'makkiyah',juz:17},22:{type:'madaniyah',juz:17},23:{type:'makkiyah',juz:18},24:{type:'madaniyah',juz:18},
+  25:{type:'makkiyah',juz:18},26:{type:'makkiyah',juz:19},27:{type:'makkiyah',juz:19},28:{type:'makkiyah',juz:20},
+  29:{type:'makkiyah',juz:20},30:{type:'makkiyah',juz:21},31:{type:'makkiyah',juz:21},32:{type:'makkiyah',juz:21},
+  33:{type:'madaniyah',juz:21},34:{type:'makkiyah',juz:22},35:{type:'makkiyah',juz:22},36:{type:'makkiyah',juz:22},
+  37:{type:'makkiyah',juz:23},38:{type:'makkiyah',juz:23},39:{type:'makkiyah',juz:23},40:{type:'makkiyah',juz:24},
+  41:{type:'makkiyah',juz:24},42:{type:'makkiyah',juz:25},43:{type:'makkiyah',juz:25},44:{type:'makkiyah',juz:25},
+  45:{type:'makkiyah',juz:25},46:{type:'makkiyah',juz:26},47:{type:'madaniyah',juz:26},48:{type:'madaniyah',juz:26},
+  49:{type:'madaniyah',juz:26},50:{type:'makkiyah',juz:26},51:{type:'makkiyah',juz:26},52:{type:'makkiyah',juz:27},
+  53:{type:'makkiyah',juz:27},54:{type:'makkiyah',juz:27},55:{type:'madaniyah',juz:27},56:{type:'makkiyah',juz:27},
+  57:{type:'madaniyah',juz:27},58:{type:'madaniyah',juz:28},59:{type:'madaniyah',juz:28},60:{type:'madaniyah',juz:28},
+  61:{type:'madaniyah',juz:28},62:{type:'madaniyah',juz:28},63:{type:'madaniyah',juz:28},64:{type:'madaniyah',juz:28},
+  65:{type:'madaniyah',juz:28},66:{type:'madaniyah',juz:28},67:{type:'makkiyah',juz:29},68:{type:'makkiyah',juz:29},
+  69:{type:'makkiyah',juz:29},70:{type:'makkiyah',juz:29},71:{type:'makkiyah',juz:29},72:{type:'makkiyah',juz:29},
+  73:{type:'makkiyah',juz:29},74:{type:'makkiyah',juz:29},75:{type:'makkiyah',juz:29},76:{type:'madaniyah',juz:29},
+  77:{type:'makkiyah',juz:29},78:{type:'makkiyah',juz:30},79:{type:'makkiyah',juz:30},80:{type:'makkiyah',juz:30},
+  81:{type:'makkiyah',juz:30},82:{type:'makkiyah',juz:30},83:{type:'makkiyah',juz:30},84:{type:'makkiyah',juz:30},
+  85:{type:'makkiyah',juz:30},86:{type:'makkiyah',juz:30},87:{type:'makkiyah',juz:30},88:{type:'makkiyah',juz:30},
+  89:{type:'makkiyah',juz:30},90:{type:'makkiyah',juz:30},91:{type:'makkiyah',juz:30},92:{type:'makkiyah',juz:30},
+  93:{type:'makkiyah',juz:30},94:{type:'makkiyah',juz:30},95:{type:'makkiyah',juz:30},96:{type:'makkiyah',juz:30},
+  97:{type:'makkiyah',juz:30},98:{type:'madaniyah',juz:30},99:{type:'madaniyah',juz:30},100:{type:'makkiyah',juz:30},
+  101:{type:'makkiyah',juz:30},102:{type:'makkiyah',juz:30},103:{type:'makkiyah',juz:30},104:{type:'makkiyah',juz:30},
+  105:{type:'makkiyah',juz:30},106:{type:'makkiyah',juz:30},107:{type:'makkiyah',juz:30},108:{type:'makkiyah',juz:30},
+  109:{type:'makkiyah',juz:30},110:{type:'madaniyah',juz:30},111:{type:'makkiyah',juz:30},112:{type:'makkiyah',juz:30},
+  113:{type:'makkiyah',juz:30},114:{type:'makkiyah',juz:30}
+};
+
+function filterSurah(){
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const grid = document.getElementById('surahGrid');
+  if(!grid) return;
+  const items = grid.querySelectorAll('.sg-item');
+  items.forEach(el=>{
+    const n = parseInt(el.dataset.n||el.querySelector('.n')?.textContent||'0');
+    const name = SURAH_NAMES[n-1]||'';
+    const meta = SURAHS_META[n]||{};
+    let show = true;
+    // Search filter
+    if(q){
+      const matchName = name.toLowerCase().includes(q);
+      const matchNum = String(n).includes(q);
+      const matchArti = (el.dataset.arti||'').toLowerCase().includes(q);
+      if(!matchName && !matchNum && !matchArti) show = false;
+    }
+    // Type filter
+    if(activeFilter==='makkiyah' && meta.type!=='makkiyah') show = false;
+    if(activeFilter==='madaniyah' && meta.type!=='madaniyah') show = false;
+    if(activeFilter==='juz28' && meta.juz!==28 && n<58) show = false;
+    if(activeFilter==='juz28' && n<58 && meta.juz!==28) show = false;
+    el.classList.toggle('hidden', !show);
+  });
+}
+
+function setFilter(f, btn){
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  filterSurah();
+}
 
 function esc(t){ return String(t).replace(/</g,'&lt;'); }
 
@@ -154,14 +228,23 @@ function renderHome(){
   <div class="wrap">
     <div class="grid-head">
       <h3>Daftar surah</h3>
-      <p>${AVAILABLE.length} dari 114 surah tersedia \u2014 sisanya sedang disusun dan ditinjau.</p>
+      <p>${AVAILABLE.length} dari114 surah tersedia — sisanya sedang disusun dan ditinjau.</p>
     </div>
-    <div class="surah-grid">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="🔍 Cari surah (nama, nomor, atau terjemahan)..." oninput="filterSurah()">
+    </div>
+    <div class="filter-btns">
+      <button class="filter-btn active" onclick="setFilter('all',this)">Semua</button>
+      <button class="filter-btn" onclick="setFilter('makkiyah',this)">Makkiyah</button>
+      <button class="filter-btn" onclick="setFilter('madaniyah',this)">Madaniyah</button>
+      <button class="filter-btn" onclick="setFilter('juz28',this)">Juz28 (pendek)</button>
+    </div>
+    <div class="surah-grid" id="surahGrid">
       ${SURAH_NAMES.map((nm,i)=>{
         const n=i+1, on=AVAILABLE.includes(n);
         return on
-          ? `<a class="sg-item on" href="#/surah/${n}"><span class="n">${n}</span><span>${nm}</span></a>`
-          : `<div class="sg-item off"><span class="n">${n}</span><span>${nm}<span class="soon">menyusul</span></span></div>`;
+          ? `<a class="sg-item on" data-n="${n}" data-arti="${nm}" href="#/surah/${n}"><span class="n">${n}</span><span>${nm}</span></a>`
+          : `<div class="sg-item off" data-n="${n}"><span class="n">${n}</span><span>${nm}<span class="soon">menyusul</span></span></div>`;
       }).join('')}
     </div>
   </div>`;
