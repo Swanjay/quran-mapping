@@ -450,7 +450,7 @@ function renderSurah(n){
               <p>Klik untuk menampilkan tafsir ayat ${i+1} surah ${esc(s.nama)}. Tafsir lengkap: <a href="https://tafsirweb.com" target="_blank" style="color:var(--emerald)">tafsirweb.com</a></p>
             </div>
             <div class="ayat-actions">
-              <button class="ayat-action-btn bm-btn" data-s="${s.nomor}" data-a="${i+1}" title="Bookmark">${isBookmarked(${s.nomor},${i+1})?'🔖':'🏷️'}</button>
+              <button class="ayat-action-btn bm-btn" data-s="${s.nomor}" data-a="${i+1}" title="Bookmark">🏷️</button>
               <button class="ayat-action-btn cp-btn" data-s="${s.nomor}" data-a="${i+1}" title="Salin">📋</button>
               <button class="ayat-action-btn sh-btn" data-s="${s.nomor}" data-a="${i+1}" title="Bagikan">📤</button>
               <button class="ayat-action-btn tf-btn" data-a="${i+1}" title="Tafsir">📖</button>
