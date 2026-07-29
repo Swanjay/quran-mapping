@@ -377,6 +377,13 @@ function renderHome(){
       <button class="filter-btn" onclick="setFilter('madaniyah',this)">Madaniyah</button>
       <button class="filter-btn" onclick="setFilter('juz28',this)">Juz28 (pendek)</button>
     </div>
+    <div class="stats-bar">
+      <div class="stat-card"><div class="stat-num" id="stat-ayat">0</div><div class="stat-label">Ayat dibaca</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-juz">0</div><div class="stat-label">Juz dikunjungi</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-bm">0</div><div class="stat-label">Bookmark</div></div>
+    </div>
+    <div class="juz-tracker" id="juzTracker"></div>
+    <div id="lastReadBar" style="margin-bottom:16px"></div>
     <div class="surah-grid" id="surahGrid">
       ${SURAH_NAMES.map((nm,i)=>{
         const n=i+1, on=AVAILABLE.includes(n);
@@ -424,6 +431,7 @@ function renderSurah(n){
           <button id="f-plus" title="Perbesar teks Arab">A+</button>
         </div>
         <div class="toggle ${document.body.classList.contains('no-latin')?'':'on'}" id="tgl-latin"><span>Latin</span><span class="switch"></span></div>
+        <div class="toggle ${hafalanMode?'on':''}" id="tgl-hafalan" onclick="toggleHafalan()"><span>Hafalan</span><span class="switch"></span></div>
       </div>
       <div id="ayat-list">
         ${s.ayat.map((a,i)=>`
@@ -437,6 +445,16 @@ function renderSurah(n){
             <p class="latin">${esc(a.latin)}</p>
             <p class="tr">${esc(a.tr)}</p>
             <p class="audio-note">Sedang diputar \u00B7 ${QARI_NAMA}</p>
+            <div class="tafsir-panel" id="tafsir-${i+1}">
+              <div class="tafsir-title">TAFSIR</div>
+              <p>Klik untuk menampilkan tafsir ayat ${i+1} surah ${esc(s.nama)}. Tafsir lengkap: <a href="https://tafsirweb.com" target="_blank" style="color:var(--emerald)">tafsirweb.com</a></p>
+            </div>
+            <div class="ayat-actions">
+              <button class="ayat-action-btn" onclick="toggleBookmark(${s.nomor},${i+1});this.textContent=isBookmarked(${s.nomor},${i+1})?'🔖':'🏷️'" title="Bookmark">${isBookmarked(${s.nomor},${i+1})?'🔖':'🏷️'}</button>
+              <button class="ayat-action-btn" onclick="copyAyat(${s.nomor},${i+1},this.closest('.ayat-body').querySelector('.ar').textContent,this.closest('.ayat-body').querySelector('.tr').textContent)" title="Salin">📋</button>
+              <button class="ayat-action-btn" onclick="shareAyat(${s.nomor},${i+1},this.closest('.ayat-body').querySelector('.ar').textContent,this.closest('.ayat-body').querySelector('.tr').textContent)" title="Bagikan">📤</button>
+              <button class="ayat-action-btn" onclick="document.getElementById('tafsir-${i+1}').classList.toggle('show')" title="Tafsir">📖</button>
+            </div>
           </div>
         </div>`).join('')}
       </div>
@@ -587,6 +605,43 @@ function route(){
 window.addEventListener('hashchange', route);
 route();
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}
+
+// Populate stats, juz tracker, last read
+function updateDashboard(){
+  const stats = getReadStats();
+  const juzRead = getReadJuz();
+  const bms = getBookmarks();
+  const lr = getLastRead();
+  
+  const statAyat = document.getElementById('stat-ayat');
+  const statJuz = document.getElementById('stat-juz');
+  const statBm = document.getElementById('stat-bm');
+  if(statAyat) statAyat.textContent = stats.ayatRead||0;
+  if(statJuz) statJuz.textContent = juzRead.length;
+  if(statBm) statBm.textContent = bms.length;
+  
+  // Juz tracker
+  const tracker = document.getElementById('juzTracker');
+  if(tracker){
+    let html = '';
+    for(let j=1;j<=30;j++){
+      const read = juzRead.includes(j);
+      html += '<div class="juz-dot'+(read?' read':'')+'" title="Juz '+j+(read?' ✓':'')+'" onclick="location.hash=\'#/surah/'+(j*2-1)+'\'">'+j+'</div>';
+    }
+    tracker.innerHTML = html;
+  }
+  
+  // Last read bar
+  const bar = document.getElementById('lastReadBar');
+  if(bar){
+    if(lr){
+      bar.innerHTML = '<a class="btn btn-primary" href="#/surah/'+lr.surah+'" style="margin-right:10px">📖 Lanjut: '+SURAH_NAMES[lr.surah-1]+' ayat '+lr.ayat+'</a><a class="btn btn-ghost" href="#/bookmarks">🔖 Bookmark ('+bms.length+')</a>';
+    } else if(bms.length){
+      bar.innerHTML = '<a class="btn btn-ghost" href="#/bookmarks">🔖 Bookmark ('+bms.length+')</a>';
+    }
+  }
+}
+updateDashboard();
 </script>
 </body>
 </html>
