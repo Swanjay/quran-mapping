@@ -450,10 +450,10 @@ function renderSurah(n){
               <p>Klik untuk menampilkan tafsir ayat ${i+1} surah ${esc(s.nama)}. Tafsir lengkap: <a href="https://tafsirweb.com" target="_blank" style="color:var(--emerald)">tafsirweb.com</a></p>
             </div>
             <div class="ayat-actions">
-              <button class="ayat-action-btn" onclick="toggleBookmark(${s.nomor},${i+1});this.textContent=isBookmarked(${s.nomor},${i+1})?'🔖':'🏷️'" title="Bookmark">${isBookmarked(${s.nomor},${i+1})?'🔖':'🏷️'}</button>
-              <button class="ayat-action-btn" onclick="copyAyat(${s.nomor},${i+1},this.closest('.ayat-body').querySelector('.ar').textContent,this.closest('.ayat-body').querySelector('.tr').textContent)" title="Salin">📋</button>
-              <button class="ayat-action-btn" onclick="shareAyat(${s.nomor},${i+1},this.closest('.ayat-body').querySelector('.ar').textContent,this.closest('.ayat-body').querySelector('.tr').textContent)" title="Bagikan">📤</button>
-              <button class="ayat-action-btn" onclick="document.getElementById('tafsir-${i+1}').classList.toggle('show')" title="Tafsir">📖</button>
+              <button class="ayat-action-btn bm-btn" data-s="${s.nomor}" data-a="${i+1}" title="Bookmark">${isBookmarked(${s.nomor},${i+1})?'🔖':'🏷️'}</button>
+              <button class="ayat-action-btn cp-btn" data-s="${s.nomor}" data-a="${i+1}" title="Salin">📋</button>
+              <button class="ayat-action-btn sh-btn" data-s="${s.nomor}" data-a="${i+1}" title="Bagikan">📤</button>
+              <button class="ayat-action-btn tf-btn" data-a="${i+1}" title="Tafsir">📖</button>
             </div>
           </div>
         </div>`).join('')}
@@ -642,6 +642,35 @@ function updateDashboard(){
   }
 }
 updateDashboard();
+
+// Event delegation for ayat action buttons
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.ayat-action-btn');
+  if(!btn) return;
+  const s = parseInt(btn.dataset.s);
+  const a = parseInt(btn.dataset.a);
+  const ayatBody = btn.closest('.ayat-body');
+  
+  if(btn.classList.contains('bm-btn')){
+    const added = toggleBookmark(s, a);
+    btn.textContent = added ? '🔖' : '🏷️';
+    showToast(added ? 'Bookmark ditambahkan' : 'Bookmark dihapus');
+  }
+  else if(btn.classList.contains('cp-btn')){
+    const ar = ayatBody?.querySelector('.ar')?.textContent || '';
+    const tr = ayatBody?.querySelector('.tr')?.textContent || '';
+    copyAyat(s, a, ar, tr);
+  }
+  else if(btn.classList.contains('sh-btn')){
+    const ar = ayatBody?.querySelector('.ar')?.textContent || '';
+    const tr = ayatBody?.querySelector('.tr')?.textContent || '';
+    shareAyat(s, a, ar, tr);
+  }
+  else if(btn.classList.contains('tf-btn')){
+    const panel = document.getElementById('tafsir-'+a);
+    if(panel) panel.classList.toggle('show');
+  }
+});
 </script>
 </body>
 </html>
