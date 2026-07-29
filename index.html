@@ -22,6 +22,14 @@
   --sans:'Source Sans 3', 'Segoe UI', sans-serif;
   --arabic:'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
 }
+body.dark{
+  --ink:#e8e6e1; --ink-soft:#b0aca5; --ink-mute:#7a766f;
+  --paper:#1a1a1a; --card:#252525;
+  --emerald:#3dba8f; --emerald-deep:#2d9a73; --emerald-pale:#1a3a2e;
+  --gold:#d4a043; --gold-pale:#2a2215; --line:#333333;
+}
+.theme-toggle{background:none;border:1px solid var(--line);border-radius:20px;padding:6px 12px;cursor:pointer;font-size:16px;color:var(--ink-soft);transition:all .2s}
+.theme-toggle:hover{border-color:var(--emerald);color:var(--emerald)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7}
 a{color:var(--emerald);text-decoration:none}
@@ -127,6 +135,7 @@ footer{padding:26px 0 46px;font-size:13px;color:var(--ink-mute);display:flex;jus
       <a href="#" onclick="location.hash='';return false;">Daftar surah</a>
       <a href="#/surah/1">Al-Fatihah</a>
       <a href="#/rujukan">Rujukan</a>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema">🌙</button>
     </nav>
   </div>
 </header>
@@ -146,6 +155,54 @@ const REGISTRY = {};
 function registerSurah(d){ REGISTRY[d.nomor] = d; }
 const pad = n => String(n).padStart(3,'0');
 const audioUrl = (su, ay) => `https://everyayah.com/data/${QARI}/${pad(su)}${pad(ay)}.mp3`;
+
+// === THEME ===
+function toggleTheme(){
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  localStorage.setItem('qm-theme', isDark?'dark':'light');
+  document.querySelector('.theme-toggle').textContent = isDark?'☀️':'🌙';
+}
+(function(){
+  const t = localStorage.getItem('qm-theme');
+  if(t==='dark'){document.body.classList.add('dark');}
+})();
+
+// === LAST READ ===
+function saveLastRead(surah, ayat){
+  localStorage.setItem('qm-lastread', JSON.stringify({surah,ayat,time:Date.now()}));
+}
+function getLastRead(){
+  try{return JSON.parse(localStorage.getItem('qm-lastread'));}catch(e){return null;}
+}
+
+// === BOOKMARKS ===
+function getBookmarks(){
+  try{return JSON.parse(localStorage.getItem('qm-bookmarks'))||[];}catch(e){return [];}
+}
+function toggleBookmark(surah, ayat){
+  let bm = getBookmarks();
+  const idx = bm.findIndex(b=>b.s===surah&&b.a===ayat);
+  if(idx>=0){bm.splice(idx,1);}
+  else{bm.push({s:surah,a:ayat,time:Date.now()});}
+  localStorage.setItem('qm-bookmarks', JSON.stringify(bm));
+  return idx<0;
+}
+function isBookmarked(surah, ayat){
+  return getBookmarks().some(b=>b.s===surah&&b.a===ayat);
+}
+
+// === SHARE ===
+function shareAyat(surah, ayat, ar, tr){
+  const name = SURAH_NAMES[surah-1];
+  const text = `QS. ${name} (${surah}:${ayat})\n\n${ar}\n\n${tr}\n\n— Quran Mapping`;
+  if(navigator.share){
+    navigator.share({title:`${name} ${surah}:${ayat}`,text}).catch(()=>{});
+  } else {
+    const wa = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    window.open(wa,'_blank');
+  }
+}
 const view = document.getElementById('view');
 const audio = new Audio();
 let nowPlaying = 0, sequential = false, currentSurah = 0, arSize = 34;
