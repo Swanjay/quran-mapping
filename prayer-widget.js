@@ -1,4 +1,4 @@
-// ==================== PRAYER TIMES WIDGET — FIXED VERSION ====================
+// ==================== PRAYER TIMES WIDGET — FULLY FIXED ====================
 (function() {
     const CITY_KEY = 'qm-city';
     const PRAYER_KEY = 'qm-prayer-cache';
@@ -13,6 +13,8 @@
 
     let selected = null;
     let adhan = null;
+    let initAttempts = 0;
+    const MAX_INIT_ATTEMPTS = 5;
 
     function loadAdhan() {
         return new Promise((resolve) => {
@@ -21,23 +23,37 @@
                 resolve(true);
                 return;
             }
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/adhan/4.0.0/adhan.min.js';
-            script.onload = () => {
-                adhan = window.adhan;
-                resolve(true);
-            };
-            script.onerror = () => {
-                const s2 = document.createElement('script');
-                s2.src = 'https://unpkg.com/adhan@4.0.0/dist/adhan.umd.min.js';
-                s2.onload = () => {
-                    adhan = window.adhan;
-                    resolve(true);
+            // Try multiple CDN sources in sequence
+            const cdnUrls = [
+                'https://cdnjs.cloudflare.com/ajax/libs/adhan/4.0.0/adhan.min.js',
+                'https://unpkg.com/adhan@4.0.0/dist/adhan.umd.min.js',
+                'https://cdn.jsdelivr.net/npm/adhan@4.0.0/dist/adhan.umd.min.js'
+            ];
+            let idx = 0;
+
+            function tryNext() {
+                if (idx >= cdnUrls.length) {
+                    resolve(false);
+                    return;
+                }
+                const script = document.createElement('script');
+                script.src = cdnUrls[idx];
+                script.onload = () => {
+                    if (window.adhan) {
+                        adhan = window.adhan;
+                        resolve(true);
+                    } else {
+                        idx++;
+                        tryNext();
+                    }
                 };
-                s2.onerror = () => resolve(false);
-                document.head.appendChild(s2);
-            };
-            document.head.appendChild(script);
+                script.onerror = () => {
+                    idx++;
+                    tryNext();
+                };
+                document.head.appendChild(script);
+            }
+            tryNext();
         });
     }
 
@@ -53,26 +69,35 @@
 
     function calculatePrayerTimes(lat, lng, tz) {
         if (!adhan) return null;
-        const coords = new adhan.Coordinates(lat, lng);
-        const params = adhan.CalculationMethod.MuslimWorldLeague();
-        const date = new Date();
-        const times = new adhan.PrayerTimes(coords, date, params);
-        return {
-            fajr: formatTime(times.fajr),
-            sunrise: formatTime(times.sunrise),
-            dhuhr: formatTime(times.dhuhr),
-            asr: formatTime(times.asr),
-            maghrib: formatTime(times.maghrib),
-            isha: formatTime(times.isha),
-            date: date.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
-        };
+        try {
+            const coords = new adhan.Coordinates(lat, lng);
+            const params = adhan.CalculationMethod.MuslimWorldLeague();
+            const date = new Date();
+            const times = new adhan.PrayerTimes(coords, date, params);
+            return {
+                fajr: formatTime(times.fajr),
+                sunrise: formatTime(times.sunrise),
+                dhuhr: formatTime(times.dhuhr),
+                asr: formatTime(times.asr),
+                maghrib: formatTime(times.maghrib),
+                isha: formatTime(times.isha),
+                date: date.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+            };
+        } catch(e) {
+            console.error('Prayer calculation error:', e);
+            return null;
+        }
     }
 
     function render(data, city) {
         const el = document.getElementById('prayer-widget');
         if (!el) return;
-        if (!data) {
-            el.innerHTML = `<div style="padding:12px;background:var(--card);border-radius:12px;border:1px solid var(--line);text-align:center;color:var(--ink-mute)">⏳ Gagal muat waktu shalat</div>`;
+        if (!data || !adhan) {
+            // Show loading state with retry button
+            el.innerHTML = `<div style="padding:12px;background:var(--card);border-radius:12px;border:1px solid var(--line);text-align:center;color:var(--ink-mute);max-width:280px;font-size:13px">
+                <div>⏳ Memuat waktu shalat...</div>
+                <button onclick="window.retryPrayerWidget()" style="margin-top:8px;padding:4px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);cursor:pointer;font-size:12px">🔄 Coba lagi</button>
+            </div>`;
             return;
         }
         const now = new Date();
@@ -97,7 +122,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
                 <span style="font-weight:600;color:var(--emerald-deep)">🕌 ${city.name}</span>
                 <span style="font-size:11px;color:var(--ink-mute)">${data.date}</span>
-                <button onclick="document.getElementById('prayer-widget').style.display='none';localStorage.setItem('qm-prayer-hidden','true')" style="background:none;border:none;cursor:pointer;color:var(--ink-mute)">✕</button>
+                <button onclick="document.getElementById('prayer-widget').style.display='none';localStorage.setItem('qm-prayer-hidden','true')" style="background:none;border:none;cursor:pointer;color:var(--ink-mute);font-size:16px">✕</button>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 10px">
                 ${times.map(t => `
@@ -111,9 +136,9 @@
             <div style="display:flex;gap:6px;margin-top:8px">
                 <select id="city-select" onchange="window.changeCity(this.value)" style="flex:1;padding:4px 6px;border:1px solid var(--line);border-radius:6px;font-size:12px;background:var(--card);color:var(--ink)">
                     <option value="">Pilih kota</option>
-                    ${CITIES.map(c => `<option value="${c.lat},${c.lng},${c.tz}">${c.name}</option>`).join('')}
+                    ${CITIES.map(c => `<option value="${c.lat},${c.lng},${c.tz}" ${c.name === city.name ? 'selected' : ''}>${c.name}</option>`).join('')}
                 </select>
-                <button onclick="window.refreshPrayer()" style="padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);cursor:pointer">↻</button>
+                <button onclick="window.refreshPrayer()" style="padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);cursor:pointer;font-size:14px">↻</button>
             </div>
         </div>`;
     }
@@ -159,15 +184,26 @@
         if (selected) load(selected);
     };
 
+    window.retryPrayerWidget = function() {
+        if (selected) {
+            adhan = null;
+            load(selected);
+        }
+    };
+
     function init() {
-        const container = document.createElement('div');
-        container.id = 'prayer-widget';
-        container.style.position = 'fixed';
-        container.style.bottom = '20px';
-        container.style.right = '20px';
-        container.style.zIndex = '1000';
-        container.style.maxWidth = '280px';
-        document.body.appendChild(container);
+        // Check if container exists, if not create it
+        let container = document.getElementById('prayer-widget');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'prayer-widget';
+            container.style.position = 'fixed';
+            container.style.bottom = '20px';
+            container.style.right = '20px';
+            container.style.zIndex = '1000';
+            container.style.maxWidth = '280px';
+            document.body.appendChild(container);
+        }
 
         if (localStorage.getItem('qm-prayer-hidden') === 'true') {
             container.style.display = 'none';
@@ -184,6 +220,7 @@
         }, 5 * 60 * 1000);
     }
 
+    // Wait for DOM ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
